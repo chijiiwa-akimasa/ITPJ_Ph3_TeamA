@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head class= 'container p-3'>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' 
+    href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css' />
+    <style>
+    .list {
+      display: flex;
+			position:relative;
+      top:10px;
+			left:847px;
+    }
+    .all {
+      display: flex;
+    }
+    *{/* 初期化 */
+			margin:0px;
+      padding:0px;
+		}
+    .b2 {opacity:0.4; }
+    table {
+      width: 1410px;
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+    th {
+      background-color: aqua;
+    }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>交通費データ</h2>
+    <h3><%= h3 %></h3>
+    <div class="all">
+      <div class="form-group btn">
+        <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
+        <input type="button" id="b2" value="交通費" class="btn btn-primary b2" onclick="location.href='http://localhost:3000/jmkotsuhi'">
+      </div>
+      <form method="POST" action="/jm">
+        <div class='list'>
+          <div class='form-group form-inline'>
+            <label>ステータス</label>
+            <select id='status' name='status' class='form-control'>
+              <option>全て</option>
+              <option>未申請</option>
+              <option>JM申請中</option>
+              <option>経理申請中</option>
+              <option>承認</option>
+              <option>却下</option>
+            </select>
+          </div>
+          <div class='form-group form-inline'>
+            <label>社員</label>
+            <select id='employee' name='employee' class='form-control'>
+              <option>全て</option>
+              <option>aaa</option>
+              <option>bbb</option>
+              <option>ccc</option>
+            </select>
+          </div>
+          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown'>
+        </div>
+      </form>
+  </div>
+
+  <table>
+  <!-- <table border="1"> -->
+    <!-- テーブルタイトル -->
+    <tr>
+      <th rowspan="2">ステータス</th>
+      <th rowspan="2">RefNo</th>
+      <th rowspan="2">利用日</th>
+      <th rowspan="2">From</th>
+      <th rowspan="2">To</th>
+      <th rowspan="2">回数</th>
+      <th rowspan="2">立替</th>
+      <th rowspan="2">JobC</th>
+      <th rowspan="2">単価</th>
+      <th rowspan="2">小計</th> 
+      <th colspan="4">JM承認</th>
+    </tr>
+    <tr>
+      <th>未</th>
+      <th>承認</th>
+      <th>却下</th>
+      <th>コメント入力</th>
+    </tr>
+
+    <!-- レコード列。DBから取ってくる -->
+    <!-- <tr>
+      <td><%= status%></td>
+      <td><%= refno%></td>
+      <td><%= date%></td>
+      <td><%= from%></td>
+      <td><%= to%></td>
+      <td><%= times%></td>
+      <td><%= tatekae%></td>
+      <td><%= jobc%></td>
+      <td><%= price%></td>
+      <td><%= subtotal%></td>
+      <td>
+        <input type="radio" name="status" value="0" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="1" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="2" />
+      </td>
+    </tr> -->
+
+    <!-- サンプル -->
+    <tr>
+      <td>JM申請中</td>
+      <td>1</td>
+      <td>赤坂</td>
+      <td>新宿</td>
+      <td>2</td>
+      <td>立替</td>
+      <td>C</td>
+      <td>6/15</td>
+      <td>1000</td>
+      <td>20000</td>
+      <td>
+        <input type="radio" name="status" value="0" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="1" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="2" />
+      </td>
+    </tr>
+  </table>
+
+  </body>
+</html>
