@@ -6,44 +6,235 @@
     <link rel='stylesheet' 
     href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css' />
     <style>
-    .list {
+     /* ヘッダーの位置固定 */
+     .header{
+      position: fixed;
+      margin-top: -250px;
+      width: 100%;
+      background-color: white;
+      z-index: 100;
+    }
+    .data{
+      margin-top: 250px;
+    }
+    .employee{
+      margin-right: 100px;
+    }
+    .status{
+      margin-right: 10px;
+    }
+     /*右上ボタンの位置 */
+     .list {
       display: flex;
 			position:relative;
-      top:10px;
-			left:847px;
+      top:-28px;
+			left:425px;
     }
+    .narrowDown{
+      height:38px;
+      display: flex;
+			position:relative;
+      top:3px;
+			left:440px;
+    }
+    /*ヘッダー・ 絞り込みボタン・プルダウンの位置固定 */
     .all {
       display: flex;
     }
-    *{/* 初期化 */
+    /* 初期化 */
+    /* *{
 			margin:0px;
       padding:0px;
-		}
+		} */
+       /* 左上ボタンの透明度 */
     .b1 {opacity:0.4; }
-    table {
+    /* ヘッダーテーブルのもろもろ */
+    .st-tbl1 {
       width: 1410px;
       margin-left: 10px;
-      margin-top: 10px;
+      margin-top: -30px; 
+      background-color: #98D3F5;
+      border: 1.5px black solid;  
+      display: inline-block;
     }
-    th {
-      background-color: aqua;
+    .st-tbl1 th:nth-child(1){
+      width: 90px;
+    }
+    .st-tbl1 th:nth-child(2){
+      width: 60px;
+    }
+    .st-tbl1 th:nth-child(4),.st-tbl1 th:nth-child(5),.st-tbl1 th:nth-child(6),.st-tbl1 th:nth-child(7),.st-tbl1 th:nth-child(8){
+      width: 68px;
+    }
+    .st-tbl1 th:nth-child(3){
+      width: 100px;
+    }
+    .st-tbl1 th:nth-child(9){
+      width: 120px;
+    }
+    .st-tbl1 tr:nth-child(2) th:nth-child(1),.st-tbl1 tr:nth-child(2) th:nth-child(2),.st-tbl1 tr:nth-child(2) th:nth-child(3){ 
+      width: 40px;
+    }
+    .st-tbl1 tr:nth-child(2) th:nth-child(4){ 
+      width: 580px;
+    }
+    .syoninn{
+      border:1.5px black solid;
+      border-top-style:none;
+      border-bottom-style:none;
+      border-right-style:none;
+    }
+    .mi,.syoninn1,.kyakka,.comment{
+      border:1.5px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+    }
+    /* ヘッダーテーブルの固定とその位置 */
+    /* thead {
+      position: sticky;
+	    top: 150px;
+      background-color: #98D3F5;
+      border: 1.5px black solid;  
+      display: inline-block;
+      width: 100%;
+    } */
+    .st-tbl2 {
+      width: 1410px;
+      margin-top: 10px;
+      margin-left: 10px;
+      background-color: #00CABC;
+    }
+    .employeeT{
+      width: 450px;
+    }
+    .jobT{
+      width: 960px;
+    }
+    .st-tbl3 {
+      width: 1430px;
+      margin-left: 10px;
+      margin-top: 10px; 
+      display: block;
+      overflow-y: scroll;
+      height: 27em;
+    }
+    td:nth-child(1){
+      width: 90px;
+      border:1.0px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+    }
+    td:nth-child(1).bikoran{
+      width: 90px;
+      border:1.0px black solid;
+      border-top-style:none;
+    }
+    td:nth-child(2){
+      width: 60px;
+      border:1.0px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+      border-left-style:none;
+    }
+    td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8){
+      width: 68px;
+      border:1.0px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+      border-left-style:none;
+    }
+    td:nth-child(3){
+      width: 100px;
+      border:1.0px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+      border-left-style:none;
+    }
+    td:nth-child(9){
+      width: 120px;
+      border:1.0px black solid;
+      border-bottom-style:none;
+      border-right-style:none;
+      border-left-style:none;
+    }
+    td:nth-child(10){ 
+      width: 40px;
+      border:1.0px black solid;
+      border-right-style:none;
+    }
+    td:nth-child(11),td:nth-child(12){ 
+      width: 40px;
+      border:1.0px black solid;
+      border-right-style:none;
+      border-left-style:none;
+    }
+    td:nth-child(13){ 
+      width: 580px;
+      border:1.0px black solid;
+      border-left-style:none;
+    }
+    /* .st-tbl1 tr:nth-child(1) th {
+      top: 150px;
+    } */
+     /* 2行目は1行目の高さの位置に固定する */
+    /* .st-tbl1 tr:nth-child(2) th {
+      top: 10.85rem;
+    } */
+    input[type=radio] {
+      width: 1.5em;
+      height: 1.5em;
+      position: relative;
+    }
+    input[type=text] {
+      position: relative;
+      width:530px;
+    }
+    /* 右下ボタンの位置 */
+    .btn1 {
+      display: flex;
+			position:relative;
+			left:980px;
+    }
+    .confirm{
+      width:95px;
+    }
+    .b3,.b4{
+      margin-right: 10px;
     }
     </style>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <h2>経費データ</h2>
+    <script type="text/javascript">
+      function allcheck(targetForm,flag){
+        for(i=0;i<=targetForm.elements.length;i++){
+          if(targetForm.elements[i].type == "radio" && targetForm.elements[i].value == flag){
+            targetForm.elements[i].checked = true;
+          }
+        }
+        return false;
+      }
+    </script>
+  <body class="body">
+
+    <!-- 左上部分 -->
+    <div class="header">
+    <h1><%= title %> 経費データ</h1>
     <h3><%= h3 %></h3>
+    <form method="POST" action="/jm">
+    <input type="hidden" name="previous-month" value="次月データ">
+    <a href="javascript:form1.submit()">先月データ</a>
+    <input type="hidden" name="next-month" value="次月データ">
+    <a href="javascript:form1.submit()">次月データ</a>
+    <!-- ボタン形式は美しくないのでテキストでpostする方法を選択。リンク先の指定のやり方がいまいち理解できない -->
     <div class="all">
       <div class="form-group btn">
         <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
         <input type="button" id="b2" value="交通費" class="btn btn-primary b2" onclick="location.href='http://localhost:3000/jmkotsuhi'">
       </div>
-      <form method="POST" action="/jm">
+
+      <!-- 右上部分 -->
         <div class='list'>
-          <div class='form-group form-inline'>
+          <div class='form-group'>
             <label>ステータス</label>
-            <select id='status' name='status' class='form-control'>
+            <select id='status' name='status' class='status form-control'>
               <option>全て</option>
               <option>未申請</option>
               <option>JM申請中</option>
@@ -52,61 +243,2014 @@
               <option>却下</option>
             </select>
           </div>
-          <div class='form-group form-inline'>
+          <div class='form-group'>
             <label>社員</label>
-            <select id='employee' name='employee' class='form-control'>
+            <select id='employee' name='employee' class='employee form-control'>
               <option>全て</option>
-              <option>aaa</option>
+              <option>aaaaaaa</option>
               <option>bbb</option>
               <option>ccc</option>
             </select>
           </div>
-          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown'>
+          <div class='form-group'>
+            <label>ジョブコード/ジョブ名</label>
+            <select id='employee' name='employee' class='job form-control'>
+              <option>全て</option>
+              <option>aaaaaaaaaaaaaaa</option>
+              <option>bbb</option>
+              <option>ccc</option>
+            </select>
+          </div>
+          <div class='form-group'>
+            <label>期間</label>
+            <select id='employee' name='employee' class='span form-control'>
+              <option>全て</option>
+              <option>2021/06</option>
+              <option>2021/05</option>
+              <option>2021/04</option>
+            </select>
+          </div>
         </div>
-      </form>
-  </div>
+          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-warning narrowDown" name='narrowDown'>
+    </div>
+    </form> 
 
-  <table>
+
+  <table class="st-tbl1">
   <!-- <table border="1"> -->
     <!-- テーブルタイトル -->
-    <tr>
+    <thead>
+    <tr align="center" >
       <th rowspan="2">ステータス</th>
       <th rowspan="2">RefNo</th>
-      <th rowspan="2">From</th>
-      <th rowspan="2">To</th>
-      <th rowspan="2">回数</th>
+      <th rowspan="2">勘定科目</th>
+      <th rowspan="2">摘要</th>
       <th rowspan="2">立替</th>
       <th rowspan="2">JobC</th>
       <th rowspan="2">利用日</th>
-      <th rowspan="2">単価</th>
-      <th rowspan="2">小計</th> 
-      <th colspan="4">JM承認</th>
+      <th rowspan="2">金額</th>
+      <th rowspan="2">支払先</th> 
+      <th colspan="4" class="syoninn">JM承認</th>
     </tr>
-    <tr>
-      <th>未</th>
-      <th>承認</th>
-      <th>却下</th>
-      <th>コメント入力</th>
+    <tr align="center" >
+      <th class="mi">未</th>
+      <th class="syoninn1">承認</th>
+      <th class="kyakka">却下</th>
+      <th class="comment">コメント入力</th>
     </tr>
-
+    </thead>
+  </table>
+  </div>
     <!-- レコード列。DBから取ってくる -->
-    <tr>
+    <!-- <tr>
       <td><%= status%></td>
       <td><%= refno%></td>
+      <td><%= date%></td>
       <td><%= from%></td>
       <td><%= to%></td>
       <td><%= times%></td>
       <td><%= tatekae%></td>
       <td><%= jobc%></td>
-      <td><%= date%></td>
-      <td><%= price%></td>
-      <td><%= subtotal%></td>
+      <td bgcolor="lightgrey"><%= price%></td>
+      <td bgcolor="lightgrey"><%= subtotal%></td>
+      <td>
+        <input type="radio" name="status" value="0" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="1" />
+      </td>
+      <td>
+        <input type="radio" name="status" value="2" />
+      </td>
+    </tr> -->
+
+    <div class="data">
+    <table class="st-tbl2">
+      <tr> 
+        <th class="employeeT">社員名（DBより）</th>
+        <th class="jobT">ジョブコード/ジョブ名（DBより）</th>
+      </tr>
+    </table>
+
+    <!-- サンプル -->
+  <table class="st-tbl3">
+    <tbody>
+    <div class='tbody'>
+    <form name='set'>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status1" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status1" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status1" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
     </tr>
     <tr>
-      <td>佐藤</td>
-      <td>42</td>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status2" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status2" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status2" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status3" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status3" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status3" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status4" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status4" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status4" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status5" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status5" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status5" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status6" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status6" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status6" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status7" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status7" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status7" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status8" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status8" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status8" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status9" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status9" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status9" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status10" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status10" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status10" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status11" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status11" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status11" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status12" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status12" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status12" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status13" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status13" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status13" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status14" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status14" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status14" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status15" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status15" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status15" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status16" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status16" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status16" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status17" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status17" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status17" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status18" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status18" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status18" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status19" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status19" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status19" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status20" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status20" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status20" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status21" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status21" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status21" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status22" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status22" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status22" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status23" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status23" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status23" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+    <tr align="center" >
+      <td>未申請</td>
+      <td>1</td>
+      <td>新聞図書費</td>
+      <td>書籍代</td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td><input id="chkbox0" type="checkbox"/></td>
+      <td bgcolor="lightgrey">6/15</td>
+      <td bgcolor="lightgrey">1000</td>
+      <td bgcolor="lightgrey">紀伊国屋書店</td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status24" value="0" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status24" value="1" />
+      </td>
+      <td rowspan="2">
+        <input type="radio" class='form-control' name="status24" value="2" />
+      </td>
+      <td rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+    </tr>
+  </div>
+  </tbody>
+  </table>
+  <table class="st-tbl2">
+    <tr> 
+      <th class="employeeT">社員名（DBより）</th>
+      <th class="jobT">ジョブコード/ジョブ名（DBより）</th>
     </tr>
   </table>
 
+  <!-- サンプル -->
+<table class="st-tbl3">
+  <tbody>
+  <div class='tbody'>
+  <form name='set'>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status1" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status1" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status1" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status2" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status2" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status2" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status3" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status3" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status3" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status4" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status4" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status4" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status5" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status5" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status5" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status6" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status6" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status6" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status7" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status7" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status7" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status8" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status8" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status8" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status9" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status9" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status9" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status10" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status10" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status10" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status11" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status11" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status11" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status12" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status12" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status12" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status13" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status13" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status13" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status14" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status14" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status14" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status15" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status15" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status15" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status16" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status16" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status16" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status17" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status17" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status17" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status18" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status18" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status18" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status19" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status19" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status19" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status20" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status20" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status20" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status21" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status21" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status21" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status22" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status22" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status22" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status23" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status23" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status23" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+  <tr align="center" >
+    <td>未申請</td>
+    <td>1</td>
+    <td>新聞図書費</td>
+    <td>書籍代</td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td><input id="chkbox0" type="checkbox"/></td>
+    <td bgcolor="lightgrey">6/15</td>
+    <td bgcolor="lightgrey">1000</td>
+    <td bgcolor="lightgrey">紀伊国屋書店</td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status24" value="0" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status24" value="1" />
+    </td>
+    <td rowspan="2">
+      <input type="radio" class='form-control' name="status24" value="2" />
+    </td>
+    <td rowspan="2">
+      <input type="text" class='form-control'/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+  </tr>
+</div>
+</tbody>
+</table>
+<table class="st-tbl2">
+  <tr> 
+    <th class="employeeT">社員名（DBより）</th>
+    <th class="jobT">ジョブコード/ジョブ名（DBより）</th>
+  </tr>
+</table>
+
+<!-- サンプル -->
+<table class="st-tbl3">
+<tbody>
+<div class='tbody'>
+<form name='set'>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status1" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status1" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status1" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status2" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status2" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status2" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status3" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status3" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status3" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status4" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status4" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status4" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status5" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status5" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status5" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status6" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status6" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status6" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status7" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status7" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status7" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status8" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status8" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status8" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status9" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status9" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status9" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status10" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status10" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status10" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status11" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status11" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status11" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status12" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status12" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status12" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status13" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status13" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status13" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status14" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status14" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status14" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status15" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status15" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status15" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status16" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status16" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status16" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status17" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status17" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status17" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status18" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status18" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status18" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status19" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status19" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status19" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status20" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status20" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status20" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status21" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status21" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status21" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status22" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status22" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status22" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status23" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status23" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status23" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+<tr align="center" >
+  <td>未申請</td>
+  <td>1</td>
+  <td>新聞図書費</td>
+  <td>書籍代</td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td><input id="chkbox0" type="checkbox"/></td>
+  <td bgcolor="lightgrey">6/15</td>
+  <td bgcolor="lightgrey">1000</td>
+  <td bgcolor="lightgrey">紀伊国屋書店</td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status24" value="0" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status24" value="1" />
+  </td>
+  <td rowspan="2">
+    <input type="radio" class='form-control' name="status24" value="2" />
+  </td>
+  <td rowspan="2">
+    <input type="text" class='form-control'/>
+  </td>
+</tr>
+<tr>
+  <td colspan="9" class="bikoran">ここに備考欄の内容が表示されます</td>
+</tr>
+</div>
+</tbody>
+</table>
+  
+  </div>
+
+  <!-- 右下部分 -->
+  <div class="form-group btn1">
+    <input type="button" id="b3" value="全て未にチェック" class="btn btn-light b3" onClick="allcheck(set,0)">
+    <input type="button" id="b4" value="全て承認にチェック" class="btn btn-light b4" onClick="allcheck(set,1)">
+    <input type="confirm" id='confirm' value="確定" class="btn btn-warning confirm" name='confirm'>
+  </div>
+</form>
   </body>
 </html>
