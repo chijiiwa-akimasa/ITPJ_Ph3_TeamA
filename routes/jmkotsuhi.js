@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('jmkotsuhi', {
 
     title: 'JM承認画面' ,
+    emp_name:'○○さん',
     h3:'ここに今月の日付が入るようにする' ,
     status:'',
     refno:'',
@@ -65,6 +66,7 @@ router.post('/',function(req,response,next){
       });
     }
 
+    //status番号はfor文を書く？
     //承認にチェックがあるとき
     if(req.body.status23==='1'){
       mailsend('JM承認のお知らせ','申請したレコードがJMによって承認されました');
@@ -77,6 +79,7 @@ router.post('/',function(req,response,next){
     response.render('jmkotsuhi', {
 
       title: 'JM承認画面' ,
+      emp_name:'○○さん',
       h3:'ここに今月の日付が入るようにする' ,
       status:'',
       refno:'',
