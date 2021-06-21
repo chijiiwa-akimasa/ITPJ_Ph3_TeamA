@@ -1,6 +1,13 @@
 
      /* ヘッダーの位置固定 */
-    .header{
+     .header_area{
+      position: fixed;
+      margin-top: -250px;
+      width: 100%;
+      background-color: white;
+      z-index: 100;
+    }
+     .header{
       position: fixed;
       margin-top: -250px;
       width: 100%;
