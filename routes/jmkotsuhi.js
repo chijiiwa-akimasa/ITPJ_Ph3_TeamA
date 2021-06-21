@@ -68,13 +68,15 @@ router.post('/',function(req,response,next){
 
     //status番号はfor文を書く？
     //承認にチェックがあるとき
-    if(req.body.status23==='1'){
+    for(i=1 ;i<=1000;i++){
+    if(req.body.status+i==='1'){
       mailsend('JM承認のお知らせ','申請したレコードがJMによって承認されました');
     }
     //却下にチェックがあるとき
-    else if(req.body.status23==='2'){
+    else if(req.body.status[i]==='2'){
       mailsend('JM却下のお知らせ','申請したレコードがJMによって却下されました。却下理由をご確認のうえ、再申請してください。');
     }
+    };
 
     response.render('jmkotsuhi', {
 
