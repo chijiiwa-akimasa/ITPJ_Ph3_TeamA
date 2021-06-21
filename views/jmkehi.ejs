@@ -90,22 +90,30 @@
     </tr>
 
     <!-- レコード列。DBから取ってくる -->
-    <tr>
-      <td><%= status%></td>
-      <td><%= refno%></td>
-      <td><%= from%></td>
-      <td><%= to%></td>
-      <td><%= times%></td>
-      <td><%= tatekae%></td>
-      <td><%= jobc%></td>
-      <td><%= date%></td>
-      <td><%= price%></td>
-      <td><%= subtotal%></td>
-    </tr>
-    <tr>
-      <td>佐藤</td>
-      <td>42</td>
-    </tr>
+    <% for(let i in status) { %> 
+      <tr>
+        <td><%= status[i] %></td>
+        <td><%= ref_no[i] %></td>
+        <td><%= month[i] %>/<%= day[i] %></td>
+        <td><%= code_name[i] %></td>
+        <td><%= summary[i] %></td>
+        <td><%= claim_flag[i] %></td>
+        <td><%= charge_flag[i] %></td>
+        <td><%= amount[i] %></td>
+        <td><%= payee[i] %></td>
+        <td></td>
+  
+        <td>
+          <input type="radio" name="status" value="0" />
+        </td>
+        <td>
+          <input type="radio" name="status" value="1" />
+        </td>
+        <td>
+          <input type="radio" name="status" value="2" />
+        </td>
+      </tr>
+      <% } %>  
   </table>
 
   </body>

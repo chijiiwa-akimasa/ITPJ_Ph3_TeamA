@@ -39,7 +39,7 @@
         <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
         <input type="button" id="b2" value="交通費" class="btn btn-primary b2" onclick="location.href='http://localhost:3000/jmkotsuhi'">
       </div>
-      <form method="POST" action="/jm">
+      <form method="POST" action="/jmkotsuhi">
         <div class='list'>
           <div class='form-group form-inline'>
             <label>ステータス</label>
@@ -89,42 +89,46 @@
       <th>コメント入力</th>
     </tr>
 
-    <!-- レコード列。DBから取ってくる -->
-    <!-- <tr>
-      <td><%= status%></td>
-      <td><%= refno%></td>
-      <td><%= date%></td>
-      <td><%= from%></td>
-      <td><%= to%></td>
-      <td><%= times%></td>
-      <td><%= tatekae%></td>
-      <td><%= jobc%></td>
-      <td><%= price%></td>
-      <td><%= subtotal%></td>
-      <td>
-        <input type="radio" name="status" value="0" />
-      </td>
-      <td>
-        <input type="radio" name="status" value="1" />
-      </td>
-      <td>
-        <input type="radio" name="status" value="2" />
-      </td>
-    </tr> -->
+    <!-- <td>JM申請中</td>
+    <td>1</td>
+    <td>6/18</td>
+    <td>赤坂</td>
+    <td>大島</td>
+    <td>8</td>
+    <td>0</td>
+    <td>1</td>
+    <td>307</td>
+    <td>2421</td>
+    <td></td> -->
 
-    <!-- サンプル -->
+
+
+   <% for(let i in status) { %> 
     <tr>
-      <td>JM申請中</td>
-      <td>1</td>
-      <td>赤坂</td>
-      <td>新宿</td>
-      <td>2</td>
-      <td>立替</td>
-      <td>C</td>
-      <td>6/15</td>
-      <td>1000</td>
-      <td>20000</td>
+      <td><%= status[i] %></td>
+      <td><%= ref_no[i] %></td>
+      <td><%= month[i] %>/<%= day[i] %></td>
+      <td><%= trans_from[i] %></td>
+      <td><%= trans_to[i] %></td>
+      <td><%= count[i] %></td>
+      <td><%= claim_flag[i] %></td>
+      <td><%= charge_flag[i] %></td>
+      <td><%= amount[i] %></td>
+      <td><%= total %></td>
       <td>
+
+        <!-- 確定ボタン押下時にjmkotsuhi.jsへPOST（tecommentへINSERTするため） -->
+        <form method="POST" action="/jmkotsuhi">
+          <input type="hidden" name="emp_no" value="<%- emp_no[i] %> ">
+          <input type="hidden" name="sheet_year" value="<%- sheet_year[i] %>">
+          <input type="hidden" name="sheet_month" value="<%- sheet_month[i] %>">
+          <input type="hidden" name="branch_no" value="<%- branch_no[i] %>">
+          <input type="hidden" name="app_class" value="<%- app_class[i] %>">
+          <input type="hidden" name="job_manager" value="<%- job_manager[i] %>">
+          <input type="hidden" name="app_flag" value="<%- app_flag[i] %>">
+          <input type="hidden" name="new" value="<%- new[i] %>">
+          <input type="hidden" name="new_date" value="<%- new_date[i] %>">
+          <input type="hidden" name="renew" value="<%- renew[i] %>">
         <input type="radio" name="status" value="0" />
       </td>
       <td>
@@ -133,8 +137,16 @@
       <td>
         <input type="radio" name="status" value="2" />
       </td>
+      <td>
+        <input type="" name="comment" >
+      </td>
+    </form>
     </tr>
-  </table>
+    <tr>
+      <td><%= remarks[i] %></td> 
+    </tr>
+    <% } %>   
+    </table>
 
   </body>
 </html>
