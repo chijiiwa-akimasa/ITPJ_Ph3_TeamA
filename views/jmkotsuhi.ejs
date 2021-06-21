@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head class= 'container p-3'>
     <meta charset="UTF-8">
@@ -7,24 +7,9 @@
     <link rel='stylesheet' 
     href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css' />
     
-    <script type="text/javascript">
-      function allcheck(targetForm,flag){
-        for(i=0;i<=targetForm.elements.length;i++){
-          if(targetForm.elements[i].type == "radio" && targetForm.elements[i].value == flag){
-            targetForm.elements[i].checked = true;
-          }
-        }
-        return false;
-      }
-      function allcheckout(targetForm){
-        for(i=0;i<=targetForm.elements.length;i++){
-          if(targetForm.elements[i].type == "radio" && targetForm.elements[i].value == 1 || 2){
-            targetForm.elements[i].checked = false;
-          }
-        }
-      }
-    </script>
-  <body class="body">
+  <body class="body"> -->
+
+    <%- include("partials/header") %>
 
     <!-- 左上部分 -->
     <div class="header">
@@ -1344,5 +1329,23 @@
     <input type="submit" id='confirm' value="確定" class="btn btn-warning confirm" name='confirm'>
   </div>
 </form>
-  </body>
-</html>
+
+<%- include("partials/footer") %>
+
+<!-- </div>
+</div>
+</div>
+</main>
+
+<footer>
+<div class="footer_area">
+<div class="footer_block">
+  <div class="footer_box">
+    Skylight
+  </div>
+</div>
+</div>
+</footer>
+
+</body>
+</html> -->
