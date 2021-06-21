@@ -48,9 +48,9 @@ if (mm === 1 && dd<21) {
     yyyy -=1
 }
 
-console.log(yyyy)
-console.log(mm)
-console.log(dd)
+// console.log(yyyy)
+// console.log(mm)
+// console.log(dd)
 
 
 

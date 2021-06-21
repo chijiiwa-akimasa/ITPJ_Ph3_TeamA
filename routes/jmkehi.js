@@ -17,6 +17,21 @@ var charge_flag=[];
 var amount=[];
 var payee=[];
 
+//日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
+var date = new Date();
+var yyyy = date.getFullYear();
+var mm = ("0"+(date.getMonth()+1)).slice(-2);//先月
+var nn = ("0"+(date.getMonth()+2)).slice(-2);//今月
+var dd = ("0"+date.getDate()).slice(-2);
+
+if (dd<21) { // 例) 5/21~5/31の時→5/21~6/20表示、6/1~6/20の時→5/21~6/20表示
+    mm -= 1
+    nn -= 1
+}
+if (mm === 1 && dd<21) {
+    yyyy -=1
+}
+
 /* Heroku・Postgres接続*/
  /*router.get('/', function(req, res, next) {
   const client =
@@ -57,7 +72,7 @@ var payee=[];
     if (err) {
       console.log(err); //エラー時にコンソールに表示
     } else {
-      client.query("SELECT * FROM exdetail WHERE job_manager='1' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  //第１引数にSQL
+      client.query("SELECT * FROM exdetail WHERE job_manager='1' AND (year='"+yyyy+"' AND month='"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  //第１引数にSQL
         console.log(result)
         for(var i in result.rows){
           　status[i]=result.rows[i].status;
