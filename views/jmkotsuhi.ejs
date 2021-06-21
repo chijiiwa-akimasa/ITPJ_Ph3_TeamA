@@ -43,7 +43,7 @@
         <div class='list'>
           <div class='form-group form-inline'>
             <label>ステータス</label>
-            <select id='status' name='status' class='form-control'>
+            <select id='status2' name='status2' class='form-control' value='JM申請中'>
               <option>全て</option>
               <option>未申請</option>
               <option>JM申請中</option>
@@ -54,12 +54,26 @@
           </div>
           <div class='form-group form-inline'>
             <label>社員</label>
-            <select id='employee' name='employee' class='form-control'>
+            <select id='emp_name2' name='emp_name2' class='form-control'>
               <option>全て</option>
               <option>aaa</option>
               <option>bbb</option>
               <option>ccc</option>
             </select>
+          </div>
+          <div class='form-group form-inline'>
+            <label>ジョブコード</label>
+            <input id="job_no" type="text" name="job_no">
+          </div>
+          <div class='form-group form-inline'>
+            <label>年</label>
+            <input id='yyy1' name='yyy1' class='form-control'>
+            <inputt id='m1' name='m1' class='form-control'>
+            <input id='d1' name='d1' class='form-control'>
+            ~
+            <input id='yyy2' name='yyy2' class='form-control'>
+            <input id='m2' name='m2' class='form-control'>
+            <input id='d2' name='d2' class='form-control'>
           </div>
           <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown'>
         </div>
@@ -101,8 +115,6 @@
     <td>2421</td>
     <td></td> -->
 
-
-
    <% for(let i in status) { %> 
     <tr>
       <td><%= status[i] %></td>
@@ -116,19 +128,17 @@
       <td><%= amount[i] %></td>
       <td><%= total %></td>
       <td>
-
         <!-- 確定ボタン押下時にjmkotsuhi.jsへPOST（tecommentへINSERTするため） -->
         <form method="POST" action="/jmkotsuhi">
-          <input type="hidden" name="emp_no" value="<%- emp_no[i] %> ">
-          <input type="hidden" name="sheet_year" value="<%- sheet_year[i] %>">
-          <input type="hidden" name="sheet_month" value="<%- sheet_month[i] %>">
-          <input type="hidden" name="branch_no" value="<%- branch_no[i] %>">
-          <input type="hidden" name="app_class" value="<%- app_class[i] %>">
-          <input type="hidden" name="job_manager" value="<%- job_manager[i] %>">
-          <input type="hidden" name="app_flag" value="<%- app_flag[i] %>">
-          <input type="hidden" name="new" value="<%- new[i] %>">
-          <input type="hidden" name="new_date" value="<%- new_date[i] %>">
-          <input type="hidden" name="renew" value="<%- renew[i] %>">
+          <input type="hidden" name="emp_no" value=<%= emp_no[i] %>>
+          <input type="hidden" name="sheet_year" value=<%= sheet_year[i] %>>
+          <input type="hidden" name="sheet_month" value=<%= sheet_month[i] %>>
+          <input type="hidden" name="branch_no" value=<%= branch_no[i] %>>
+          <input type="hidden" name="job_manager" value=<%= job_manager[i] %>>
+          <input type="hidden" name="new0" value=<%= new0[i] %>>
+          <input type="hidden" name="new_date" value=<%= new_date[i] %>>
+          <input type="hidden" name="renew" value=<%= renew[i] %>>
+          <input type="hidden" name="renew_date" value=<%= renew_date[i] %>>
         <input type="radio" name="status" value="0" />
       </td>
       <td>
@@ -138,7 +148,7 @@
         <input type="radio" name="status" value="2" />
       </td>
       <td>
-        <input type="" name="comment" >
+        <input type="text" name="comment" >
       </td>
     </form>
     </tr>

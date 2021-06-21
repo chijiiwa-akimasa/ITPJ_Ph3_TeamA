@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var {Client}=require('pg');
@@ -47,6 +48,13 @@ if (mm === 1 && dd<21) {
     yyyy -=1
 }
 
+console.log(yyyy)
+console.log(mm)
+console.log(dd)
+
+
+
+
 /* Heroku・Postgres接続*/
  /*router.get('/', function(req, res, next) {
   const client =
@@ -89,8 +97,9 @@ if (mm === 1 && dd<21) {
     if (err) {
       console.log(err); 
     } else {
-      client.query("SELECT * FROM tedetail WHERE job_manager='1' AND (year="+yyyy+" AND month="+mm+" AND day BETWEEN '21' AND '31') OR (year="+yyyy+" AND month="+nn+" AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  //第１引数にSQL
-       for(var i in result.rows){
+      client.query("SELECT * FROM tedetail WHERE job_manager='1' AND (year='"+yyyy+"' AND month='"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  
+        console.log(result) 
+        for(var i in result.rows){
             emp_no[i]=result.rows[i].emp_no;
             sheet_year[i]=result.rows[i].sheet_year;
             sheet_month[i]=result.rows[i].sheet_month;
@@ -137,7 +146,7 @@ if (mm === 1 && dd<21) {
       trans_from:trans_from,
       trans_to:trans_to,
       trans_waypoint:trans_waypoint,
-      amoun:amoun,
+      amount:amount,
       count:count,
       job_no:job_no,
       job_manager:job_manager,
@@ -181,8 +190,57 @@ if (mm === 1 && dd<21) {
     .catch(e => console.error(e.stack))
   
     response.redirect("/jmkotsuhi");
+
+    router.get('/',async function(req,res,next){
+      let yyy1=req.body.yyy1;
+      let m1=req.body.m1;
+      let d1=req.body.d1;
+      let yyy2=req.body.yyy2;
+      let m2=req.body.m2;
+      let d2=req.body.d2;
+    
+      client.query("SELECT * FROM tedetail WHERE job_manager='1' AND (year="+yyy1+" AND month="+m1+" AND day="+d1+") OR (year="+yyy2+" AND month="+m2+" AND day="+d2+") AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  
+        for(var i in result.rows){
+           emp_no[i]=result.rows[i].emp_no;
+           sheet_year[i]=result.rows[i].sheet_year;
+           sheet_month[i]=result.rows[i].sheet_month;
+           branch_no[i]=result.rows[i].branch_no;
+           year[i]=result.rows[i].year;
+           month[i]=result.rows[i].month;
+           day[i]=result.rows[i].day;
+           trans_type[i]=result.rows[i].trans_type;
+           trans_from[i]=result.rows[i].trans_from;
+           trans_to[i]=result.rows[i].trans_to;
+           trans_waypoint[i]=result.rows[i].trans_waypoint
+           amount[i]=result.rows[i].amount;
+           count[i]=result.rows[i].count;
+         　job_no[i]=result.rows[i].job_no;
+           job_manager[i]=result.rows[i].job_manager;        
+           claim_flag[i]=result.rows[i].claim_flag;
+           charge_flag[i]=result.rows[i].charge_flag;
+         　ref_no[i]=result.rows[i].ref_no;
+           status[i]=result.rows[i].status;       
+           remarks[i]=result.rows[i].remarks;
+           new0[i]=result.rows[i].new;
+           new_date[i]=result.rows[i].new_date;
+           renew[i]=result.rows[i].renew;
+           renew_date[i]=result.rows[i].renew_date;
+         }
+       });
+
+    
+      response.redirect("/jmkotsuhi");
+  
+
+
+
   })
 }); 
+}); 
+
+
+
+
 
 
 module.exports = router;

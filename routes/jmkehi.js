@@ -57,8 +57,9 @@ var payee=[];
     if (err) {
       console.log(err); //エラー時にコンソールに表示
     } else {
-      client.query("SELECT * FROM exdetail", function (err, result) {  //第１引数にSQL
-       for(var i in result.rows){
+      client.query("SELECT * FROM exdetail WHERE job_manager='1' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC", function (err, result) {  //第１引数にSQL
+        console.log(result)
+        for(var i in result.rows){
           　status[i]=result.rows[i].status;
           　ref_no[i]=result.rows[i].ref_no;
             month[i]=result.rows[i].month;
@@ -86,32 +87,12 @@ let opt ={
     charge_flag:charge_flag,
     amount:amount,
     payee:payee,
+    
  }
 
   res.render('jmkehi',opt);
  }
 });
-});
-
-/* GET home page.
-router.get('/', function(req, res, next) {
-  res.render('jmkehi', {
-
-    title: 'JM承認画面' ,
-    h3:'ここに今月の日付が入るようにする' ,
-    status:'',
-    refno:'',
-    from:'',
-    to:'',
-    times:'',
-    tatekae:'',
-    jobc:'',
-    date:'',
-    price:'',
-    subtotal:'',
-    
-  });
-});*/
-
+}); 
 
 module.exports = router;
