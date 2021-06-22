@@ -34,46 +34,43 @@
     <h1><%= title %></h1>
     <h2>交通費データ</h2>
     <h3><%= h3 %></h3>
+    <td id="job_manager0", name="job_manager0">1</h3>　ログイン者社員番号が入る
     <div class="all">
       <div class="form-group btn">
         <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
         <input type="button" id="b2" value="交通費" class="btn btn-primary b2" onclick="location.href='http://localhost:3000/jmkotsuhi'">
       </div>
-      <form method="POST" action="/jmkotsuhi">
+      <form method="POST" action="/jmkotsuhiresult">
         <div class='list'>
           <div class='form-group form-inline'>
             <label>ステータス</label>
-            <select id='status2' name='status2' class='form-control' value='JM申請中'>
-              <option>全て</option>
-              <option>未申請</option>
-              <option>JM申請中</option>
-              <option>経理申請中</option>
-              <option>承認</option>
-              <option>却下</option>
+            <select id='status2' name='status2' class='form-control' >
+              <option value="">全て</option>
+              <option value="00">未申請</option>
+              <option selected value="11">JM申請中</option>
+              <option value="29">経理申請中</option>
+              <option value="88">承認</option>
+              <option value="19">却下</option>
             </select>
           </div>
+
           <div class='form-group form-inline'>
             <label>社員</label>
             <select id='emp_name2' name='emp_name2' class='form-control'>
-              <option>全て</option>
-              <option>aaa</option>
-              <option>bbb</option>
-              <option>ccc</option>
-            </select>
+              <option selected >全て</option>
+              <option>山田花子</option>
+              <option>山田太郎</option>
+             </select>
           </div>
           <div class='form-group form-inline'>
             <label>ジョブコード</label>
-            <input id="job_no" type="text" name="job_no">
+            <input id="job_no2" type="text" name="job_no2" size="10">
           </div>
+
           <div class='form-group form-inline'>
-            <label>年</label>
-            <input id='yyy1' name='yyy1' class='form-control'>
-            <inputt id='m1' name='m1' class='form-control'>
-            <input id='d1' name='d1' class='form-control'>
-            ~
-            <input id='yyy2' name='yyy2' class='form-control'>
-            <input id='m2' name='m2' class='form-control'>
-            <input id='d2' name='d2' class='form-control'>
+            <label>期間</label>
+            <input id='yyy1' name='yyy1' size="4"><input id='m1' name='m1' size="2"><input id='d1' name='d1' size="2">~
+            <input id='yyy2' name='yyy2' size="4"><input id='m2' name='m2' size="2"><input id='d2' name='d2' size="2">
           </div>
           <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown'>
         </div>
@@ -117,6 +114,11 @@
 
    <% for(let i in status) { %> 
     <tr>
+    <td><%= emp_name[i] %></td> 
+    <td><%= job_no[i] %></td> 
+    </tr>
+       
+    <tr>
       <td><%= status[i] %></td>
       <td><%= ref_no[i] %></td>
       <td><%= month[i] %>/<%= day[i] %></td>
@@ -128,8 +130,8 @@
       <td><%= amount[i] %></td>
       <td><%= total %></td>
       <td>
-        <!-- 確定ボタン押下時にjmkotsuhi.jsへPOST（tecommentへINSERTするため） -->
-        <form method="POST" action="/jmkotsuhi">
+        <!-- 確定ボタン押下時にjmkotsuhi.jsへPOST（tecommentへINSERTするため）  -->
+         <form method="POST" action="/jmkotsuhi">
           <input type="hidden" name="emp_no" value=<%= emp_no[i] %>>
           <input type="hidden" name="sheet_year" value=<%= sheet_year[i] %>>
           <input type="hidden" name="sheet_month" value=<%= sheet_month[i] %>>
