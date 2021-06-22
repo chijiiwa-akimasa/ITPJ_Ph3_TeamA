@@ -32,9 +32,79 @@ var {Client}=require('pg');
  var renew=[];
  var renew_date=[];
  var radioname=[];
+ var hiddenmonth=[];
+
+ var emp_no2=[];
+ var sheet_year2=[];
+ var sheet_month2=[];
+ var branch_no2=[];
+ var year2=[];
+ var month2=[];
+ var day2=[];
+ var trans_type2=[];
+ var trans_from2=[];
+ var trans_to2=[];
+ var trans_waypoint2=[];
+ var amount2=[];
+ var count2=[];
+ var job_no2=[];
+ var job_manager2=[];
+ var claim_flag2=[];
+ var charge_flag2=[];
+ var ref_no2=[];
+ var status2=[];
+ var remarks2=[];
+ var new02=[];
+ var new_date2=[];
+ var renew2=[];
+ var renew_date2=[];
+ var radioname2=[];
+ var hiddenmonth2=[];
+
+ var emp_no3=[];
+ var sheet_year3=[];
+ var sheet_month3=[];
+ var branch_no3=[];
+ var year3=[];
+ var month3=[];
+ var day3=[];
+ var trans_type3=[];
+ var trans_from3=[];
+ var trans_to3=[];
+ var trans_waypoint3=[];
+ var amount3=[];
+ var count3=[];
+ var job_no3=[];
+ var job_manager3=[];
+ var claim_flag3=[];
+ var charge_flag3=[];
+ var ref_no3=[];
+ var status3=[];
+ var remarks3=[];
+ var new03=[];
+ var new_date3=[];
+ var renew3=[];
+ var renew_date3=[];
+ var radioname3=[];
+ var hiddenmonth3=[];
+
+ //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
+var date = new Date();
+var yyyy = date.getFullYear();
+var mm = ("0"+(date.getMonth()+1)).slice(-2);//先月
+var nn = ("0"+(date.getMonth()+2)).slice(-2);//今月
+var dd = ("0"+date.getDate()).slice(-2);
+
+if (dd<21) { // 例) 5/21~5/31の時→5/21~6/20表示、6/1~6/20の時→5/21~6/20表示
+    mm -= 1
+    nn -= 1
+}
+if (mm === 1 && dd<21) {
+    yyyy -=1
+}
 
 /* ページが読み込まれたとき */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
 
   //DBに接続
   var client =new Client({
@@ -45,52 +115,38 @@ router.get('/', function(req, res, next) {
     port:5432,
   });
 
-  // client.connect();   //これは必ず必要
+  nn = nn-1+1;
+  mm = mm-1+1;
 
   //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
-  let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-  // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year="+yyyy+" AND month="+mm+" AND day BETWEEN '21' AND '31') OR (year="+yyyy+" AND month="+nn+" AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC"
+  // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+  let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+  console.log(sql);
 
-  client.connect(async function(err, client) {
-    if (err) {
-      console.log(err); 
-    } 
-    else {
-      client.query(sql,(err,result)=>{
-        for(var i in result.rows){
-         
-        // emp_no[i]=result.rows[i].emp_no;
-        // sheet_year[i]=result.rows[i].sheet_year;
-        // sheet_month[i]=result.rows[i].sheet_month;
-        // branch_no[i]=result.rows[i].branch_no;
-        // year[i]=result.rows[i].year;
-        // month[i]=result.rows[i].month;
-        status[i]=result.rows[i].status; 
-        ref_no[i]=result.rows[i].ref_no;
-        trans_type[i]=result.rows[i].trans_type;
-        trans_from[i]=result.rows[i].trans_from;
-        trans_to[i]=result.rows[i].trans_to;
-        day[i]=result.rows[i].month + '/' +result.rows[i].day;
-        // trans_waypoint[i]=result.rows[i].trans_waypoint
-        amount[i]=result.rows[i].amount;
-        count[i]=result.rows[i].count;
-        // subtotal[i]= result.rows[i].amount * result.rows[i].count;
-      // 　job_no[i]=result.rows[i].job_no;
-        // job_manager[i]=result.rows[i].job_manager;        
-        claim_flag[i]=result.rows[i].claim_flag;
-        charge_flag[i]=result.rows[i].charge_flag;      
-        remarks[i]=result.rows[i].remarks;
-        // new0[i]=result.rows[i].new;
-        // new_date[i]=result.rows[i].new_date;
-        // renew[i]=result.rows[i].renew;
-        // renew_date[i]=result.rows[i].renew_date;
-        // radioname[i]='name="radioname' + [i] + '"';
-        radioname[i]='radioname' +[i];
+  //これは必ず必要
+  await client.connect();
 
-      } //for締める
-    });//client.query締める
-    } //else締める
-});//client.connect締める
+  client.query(sql,(err,result)=>{
+    for(var i in result.rows){
+    
+    status[i]=result.rows[i].status; 
+    ref_no[i]=result.rows[i].ref_no;
+    trans_type[i]=result.rows[i].trans_type;
+    trans_from[i]=result.rows[i].trans_from;
+    trans_to[i]=result.rows[i].trans_to;
+    day[i]=result.rows[i].month + '/' +result.rows[i].day;
+    amount[i]=result.rows[i].amount;
+    count[i]=result.rows[i].count;       
+    claim_flag[i]=result.rows[i].claim_flag;
+    charge_flag[i]=result.rows[i].charge_flag;      
+    remarks[i]=result.rows[i].remarks;
+    radioname[i]='radioname' +[i];
+    job_no[i]=result.rows[i].job_no;   
+    emp_no[i]=result.rows[i].emp_no;
+
+  } //for締める
+
+  client.end();
 
 
 // for (let i = 0; i < status.length; i++) {
@@ -119,55 +175,185 @@ router.get('/', function(req, res, next) {
 
   let opt ={
     title:'JM承認画面',
-    h3:'日付',
-    // emp_no:emp_no,
-    // sheet_year:sheet_year,
-    // sheet_month:sheet_month,
-    // branch_no:branch_no,
-    // year:year,
-    // month:month,
+    h3:nn+'月分の申請データを表示しています',
     day:day,
     trans_type:trans_type,
     trans_from:trans_from,
     trans_to:trans_to,
-    // trans_waypoint:trans_waypoint,
     amount:amount,
     count:count, 
     subtotal:amount*count,
-    // job_no:job_no,
-    // job_manager:job_manager,
     claim_flag:claim_flag,
     charge_flag:charge_flag,
     ref_no:ref_no,
     status:status,
     remarks:remarks,
-    // new0:new0,
-    // new_date:new_date,
-    // renew:renew,
-    // renew_date:renew_date,
-    radioname:radioname
+    radioname:radioname,
+    hiddenmonth:nn,
+    job_no:job_no,
+    emp_no:emp_no,
   }
   //レンダーする
   res.render('jmkotsuhi', opt);
 
+});//client.connect締める
+
 });//router.get締める
 
-  // client.end();
 
 
 
-
-
-
-
-
-router.post('/',function(req,response,next){
+router.post('/',async function(req,response,next){
 
 
   //先月データボタンを押したとき
+  if(req.body.previousmonth){
+    nn = nn -1;
+    mm = mm -1;
+
+    //DBに接続
+    var client =new Client({
+      user:'postgres',
+      host:'localhost',
+      database:'itpjph3',
+      password:'Psklt@363',
+      port:5432,
+    });
+
+    // client.connect();   //これは必ず必要
+
+    //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
+    // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    console.log(sql);
+
+    //これは必ず必要
+    await client.connect();
+
+    client.query(sql,(err,result)=>{
+      for(var i in result.rows){
+      
+      status2[i]=result.rows[i].status; 
+      ref_no2[i]=result.rows[i].ref_no;
+      trans_type2[i]=result.rows[i].trans_type;
+      trans_from2[i]=result.rows[i].trans_from;
+      trans_to2[i]=result.rows[i].trans_to;
+      day2[i]=result.rows[i].month + '/' +result.rows[i].day;
+      amount2[i]=result.rows[i].amount;
+      count2[i]=result.rows[i].count;
+      claim_flag2[i]=result.rows[i].claim_flag;
+      charge_flag2[i]=result.rows[i].charge_flag;      
+      remarks2[i]=result.rows[i].remarks;
+      radioname2[i]='radioname' +[i];
+      job_no2[i]=result.rows[i].job_no;
+      emp_no2[i]=result.rows[i].emp_no;
+
+      } //for締める
+
+      client.end();
+
+    let opt1 ={
+      title:'JM承認画面',
+      h3:nn + '月分の申請データを表示しています',
+      day:day2,
+      trans_type:trans_type2,
+      trans_from:trans_from2,
+      trans_to:trans_to2,
+      amount:amount2,
+      count:count2, 
+      subtotal:amount2*count2,
+      claim_flag:claim_flag2,
+      charge_flag:charge_flag2,
+      ref_no:ref_no2,
+      status:status2,
+      remarks:remarks2,
+      radioname:radioname2,
+      hiddenmonth:nn,
+      job_no:job_no2,
+      emp_no:emp_no2,
+    }
+
+    //レンダーする
+    response.render('jmkotsuhi', opt1);
+
+  });//client.query締める
+  } //req.body.previous-month締める
+
+
+  //次月データボタンを押したとき
+  else if(req.body.nextmonth){
+    nn = nn -1+2;
+    mm = mm -1+2;
+
+    //DBに接続
+    var client =new Client({
+      user:'postgres',
+      host:'localhost',
+      database:'itpjph3',
+      password:'Psklt@363',
+      port:5432,
+    });
+
+    //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
+    // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    console.log(sql);
+    
+    //これは必ず必要
+    await client.connect();
+
+    client.query(sql,(err,result)=>{
+      for(var i in result.rows){
+      
+      status3[i]=result.rows[i].status; 
+      ref_no3[i]=result.rows[i].ref_no;
+      trans_type3[i]=result.rows[i].trans_type;
+      trans_from3[i]=result.rows[i].trans_from;
+      trans_to3[i]=result.rows[i].trans_to;
+      day3[i]=result.rows[i].month + '/' +result.rows[i].day;
+      amount3[i]=result.rows[i].amount;
+      count3[i]=result.rows[i].count;
+      claim_flag3[i]=result.rows[i].claim_flag;
+      charge_flag3[i]=result.rows[i].charge_flag;      
+      remarks3[i]=result.rows[i].remarks;
+      radioname3[i]='radioname' +[i];
+      job_no3[i]=result.rows[i].job_no;
+      emp_no3[i]=result.rows[i].emp_no;
+
+      } //for締める
+
+      client.end();
+
+    let opt2 ={
+      title:'JM承認画面',
+      h3:nn + '月分の申請データを表示しています',
+      day:day3,
+      trans_type:trans_type3,
+      trans_from:trans_from3,
+      trans_to:trans_to3,
+      amount:amount3,
+      count:count3, 
+      subtotal:amount3*count3,
+      claim_flag:claim_flag3,
+      charge_flag:charge_flag3,
+      ref_no:ref_no3,
+      status:status3,
+      remarks:remarks3,
+      radioname:radioname3,
+      hiddenmonth:nn,
+      job_no:job_no3,
+      emp_no:emp_no3,
+    }
+
+    //レンダーする
+    response.render('jmkotsuhi', opt2);
+    
+  });//client.query締める
+  } //req.body.nextmonth締める
+
 
   //確定ボタンが押されたとき
-  if(req.body.confirm){
+  else if(req.body.confirm){
 
     //メール送信機能
     function mailsend(sub,tex){
@@ -234,8 +420,19 @@ router.post('/',function(req,response,next){
       date:'',
       price:'',
       subtotal:'',   
+      claim_flag:claim_flag3,
+      charge_flag:charge_flag3,
+      ref_no:ref_no3,
+      status:status3,
+      remarks:remarks3,
+      radioname:radioname3,
+      hiddenmonth:nn,
+      job_no:job_no3,
+      emp_no:emp_no3,
     });
  } //if(req.body.confirm)を締める
+
+
 }) //router.post締める
 
 
@@ -251,21 +448,6 @@ router.post('/',function(req,response,next){
 //const dbpassword=process.env.PASSWORD;
 // console.log(dbpassword);
 
-
-//日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
-var date = new Date();
-var yyyy = date.getFullYear();
-var mm = ("0"+(date.getMonth()+1)).slice(-2);//先月
-var nn = ("0"+(date.getMonth()+2)).slice(-2);//今月
-var dd = ("0"+date.getDate()).slice(-2);
-
-if (dd<21) { // 例) 5/21~5/31の時→5/21~6/20表示、6/1~6/20の時→5/21~6/20表示
-    mm -= 1
-    nn -= 1
-}
-if (mm === 1 && dd<21) {
-    yyyy -=1
-}
 
 /* Heroku・Postgres接続*/
  /*router.get('/', function(req, res, next) {
