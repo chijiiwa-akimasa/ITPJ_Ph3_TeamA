@@ -107,28 +107,22 @@
       border:1.0px black solid;
       border-top-style:none;
     }
-    td:nth-child(2){
+    td:nth-child(2),td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10),td:nth-child(11){
       border:1.0px black solid;
       border-bottom-style:none;
       border-right-style:none;
       border-left-style:none;
     }
-    td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9),td:nth-child(10){
-      border:1.0px black solid;
-      border-bottom-style:none;
-      border-right-style:none;
-      border-left-style:none;
-    }
-    td:nth-child(11){ 
+    td:nth-child(12){ 
       border:1.0px black solid;
       border-right-style:none;
     }
-    td:nth-child(12),td:nth-child(13){ 
+    td:nth-child(13),td:nth-child(14){ 
       border:1.0px black solid;
       border-right-style:none;
       border-left-style:none;
     }
-    td:nth-child(14){ 
+    td:nth-child(15){ 
       border:1.0px black solid;
       border-left-style:none;
     }
@@ -145,6 +139,7 @@
     .btn1 {
       display: flex;
 			position:relative;
+      top:150%;
 			left:68%;
     }
     .confirm{
