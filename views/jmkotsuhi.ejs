@@ -13,14 +13,12 @@
 
     <!-- 左上部分 -->
     <div class="header">
-    <h1><%= title %> 交通費データ </h1>
-    <h3><%= h3 %></h3>
     <form method="POST" action="/jmkotsuhi">
-    <input type="hidden" name="previous-month" value="次月データ">
-    <a href="javascript:form1.submit()">先月データ</a>
-    <input type="hidden" name="next-month" value="次月データ">
-    <a href="javascript:form1.submit()">次月データ</a>
-    <!-- ボタン形式は美しくないのでテキストでpostする方法を選択。リンク先の指定のやり方がいまいち理解できない -->
+    <h1><%= title %> 交通費データ </h1>
+    <input type="hidden" name="hiddenmonth" value=<%= h3 %>>
+    <h3><%= h3 %></h3>
+    <input type="submit" id='previousmonth' value="先月データ" class="previousmonth" name='previousmonth'>
+    <input type="submit" id='nextmonth' value="次月データ" class="nextmonth" name='nextmonth'>
     <div class="all">
       <div class="form-group btn">
         <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
@@ -122,8 +120,8 @@
     <!-- ここから下がセット -->
     <table class="st-tbl2">
       <tr> 
-        <th class="employeeT">社員名（DBより）</th>
-        <th class="jobT">ジョブコード/ジョブ名（DBより）</th>
+        <th class="employeeT"><%= emp_no %></th>
+        <th class="jobT"><%= job_no %></th>
         <th class="sumT">合計金額（DBより）</th>
       </tr>
     </table>
