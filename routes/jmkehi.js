@@ -119,8 +119,10 @@ router.get('/',async function(req, res, next) {
   // }
 
     let opt ={
-      title:'JM承認画面',
-      h3:nn+'月分の申請データを表示しています',
+      title:'JM承認 - 経費',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
       day:day,
       amount:amount,
       claim_flag:claim_flag,
@@ -223,8 +225,10 @@ router.post('/',async function(req,response,next){
       client.end();
 
       let opt1 ={
-        title:'JM承認画面',
-        h3:nn+'月分の申請データを表示しています',
+        title:'JM承認 - 経費',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
         day:day,
         amount:amount,
         claim_flag:claim_flag,
@@ -321,8 +325,10 @@ router.post('/',async function(req,response,next){
       client.end();
 
       let opt2 ={
-        title:'JM承認画面',
-        h3:nn+'月分の申請データを表示しています',
+        title:'JM承認 - 経費',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
         day:day,
         amount:amount,
         claim_flag:claim_flag,
@@ -464,8 +470,10 @@ router.post('/',async function(req,response,next){
     client.end();
 
     let opt ={
-      title:'JM承認画面',
-      h3:nn+'月分の申請データを表示しています',
+      title:'JM承認 - 経費',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
       day:day,
       amount:amount,
       claim_flag:claim_flag,
