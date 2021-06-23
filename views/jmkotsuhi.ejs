@@ -1,29 +1,24 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head class= 'container p-3'>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' 
-    href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css' />
-    
-  <body class="body"> -->
+<%- include("partials/header2") %>
 
-    <%- include("partials/header") %>
+<nav class="navbar">
+  <ul class="top">
+    <li><a href="/jmkehi">経費</a></li>
+    <h3>交通費</h3>
+  </ul>
+</nav>
 
-    <!-- 左上部分 -->
-    <form action="/jmkotsuhi" method="post"> <!-- 年月 -->
-      <input type="hidden" name="year" value="<%- year %>">
-      <input type="hidden" name="month" value="<%- nowmonth %>">
-      <input type="hidden" name="status" value="1=1">
-      <input type="hidden" name="employee" value="1=1">
-      <div class="date_box">
-        <button class="last" name="previousmonth" value="-1">◀</button>
-        <b><%- year %>年 <%- nowmonth %>月分</b>
-        <button class="next" name="nextmonth" value="+1">▶</button>
-      </div>
-    </form>
-    
+<form action="/jmkotsuhi" method="post"> <!-- 年月 -->
+  <input type="hidden" name="year" value="<%- year %>">
+  <input type="hidden" name="month" value="<%- nowmonth %>">
+  <input type="hidden" name="status" value="1=1">
+  <input type="hidden" name="employee" value="1=1">
+  <div class="date_box">
+    <button class="last" name="last" value="-1">◀</button>
+    <b><%- year %>年 <%- nowmonth %>月分</b>
+    <button class="next" name="next" value="+1">▶</button>
+  </div>
+</form>
+
 <form action="/jmkotsuhi" method="post">
   <div class="search_box">
     <input type="hidden" name="year" value="<%- year %>">
@@ -46,83 +41,70 @@
   </div>
 </form>
 
+  <!-- テーブルタイトル -->
+<table>
+  <tr>
+    <th width="100px">ステータス</th>
+    <th width="35px">月</th>
+    <th width="35px">日</th>
+    <th width="100px">From</th>
+    <th width="100px">Via</th>
+    <th width="100px">To</th>
+    <th width="80px">交通手段</th>
+    <th width="50px">回数</th>
+    <th width="55px">立替</th>
+    <th width="50px">JobC</th>
+    <th width="65px">単価</th>
+    <th width="65px">小計</th>
+    <th width="60x">RefNo</th>
+    <th width="40px">承認</th>
+    <th width="40px">却下</th>
+    <th width="185px">コメント</th>
+  </tr>
+</table>
 
+<!-- サブヘッダー -->
+<!-- まだ -->
+
+<!-- データテーブル -->
+<form method="POST" action="/jmkotsuhi" name='set'>
   <table>
-    <!-- テーブルタイトル -->
+    <% for(let i in status) { %> 
     <tr>
-      <th width="40px">ステータス</th>
-      <th width="40px">RefNo</th>
-      <th width="35px">月</th>
-      <th width="35px">日</th>
-      <th width="35px">交通手段</th>
-      <th width="100px">From</th>
-      <th width="100px">Waypoint</th>
-      <th width="100px">To</th>
-      <th width="80px">回数</th>
-      <th width="65px">立替</th>
-      <th width="50px">JobC</th>
-      <th width="65px">単価</th>
-      <th width="50px">小計</th>
-      <th width="40px">承認</th>
-      <th width="40px">却下</th>
-      <th width="185px">コメント</th>
-    </tr>
-  </table>
-
-    <form method="POST" action="/jmkotsuhi" name='set'>
-
-    <!-- サブヘッダー -->
-
-
-    <!-- データテーブル -->
-  <table>
-      <% for(let i in status) { %> 
-      <tr>
-      <td><%=status[i] %></td>
-      <td><%=ref_no[i] %></td>
-      <td><%=month[i] %></td>
-      <td><%=day[i] %></td>
-      <td><%=trans_type[i] %></td>
-      <td><%=trans_from[i] %></td>
-      <td><%=trans_waypoint[i] %></td>
-      <td><%=trans_to[i] %></td>
-      <td><%=count[i] %></td>
-      <td><input id="chkbox0" type="checkbox"/></td>
-      <td><input id="chkbox0" type="checkbox"/></td>
-      <td bgcolor="lightgrey"><%= amount[i] %></td>
-      <td bgcolor="lightgrey"><%= subtotal[i] %></td>
-      <td>
+      <td width="100px" class="first" rowspan="2"><%=status[i] %></td>
+      <td width="35px"><%=month[i] %></td>
+      <td width="35px"><%=day[i] %></td>
+      <td width="100px"><%=trans_from[i] %></td>
+      <td width="100px"><%=trans_to[i] %></td>
+      <td width="100px">経路</td>
+      <td width="80px"><%=trans_type[i] %></td>
+      <td width="50px"><%=count[i] %></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="65px" bgcolor="lightgrey"><%= amount[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= subtotal[i] %></td>
+      <td width="60px" bgcolor="lightgrey"><%=ref_no[i] %></td>
+      <td width="40px" class="first" rowspan="2">
         <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
       </td>
-      <td>
+      <td width="40px" class="first" rowspan="2">
         <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
       </td>
-      <td>
+      <td width="185px" class="first" rowspan="2">
         <input type="text" class='form-control'/>
       </td>
     </tr>
     <tr>
-      <td colspan="11"><%=remarks %></td>
+      <td class="comment" colspan="20"><%=remarks %></td>
     </tr>
-    <% } %>   
-
-  <!-- ここから上がセット -->
-  
-
-  
-
-</div>
-
-  
-
-  
-
-  <!-- 右下部分 -->
-  <div class="form-group btn1">
-    <input type="button" id="b4" name='b4' value="全て承認にチェック" class="btn btn-light b4" onClick="allcheck(set,1)">
-    <input type="button" id="b3" name='b3' value="全てのチェックを解除" class="btn btn-light b3" onClick="allcheckout(set)">
-    <input type="submit" id='confirm' value="確定" class="btn btn-warning confirm" name='confirm'>
-  </div>
+    <% } %>
+  </table>
 </form>
+
+<div class="box">
+  <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
+  <input type="button" id="b3" name='b3' value="全解除" class="allcheck" onClick="allcheckout(set)">
+  <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
+</div>
 
 <%- include("partials/footer") %>
