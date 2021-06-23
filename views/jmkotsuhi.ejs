@@ -44,22 +44,22 @@
   <!-- テーブルタイトル -->
 <table>
   <tr>
-    <th width="100px">ステータス</th>
-    <th width="35px">月</th>
-    <th width="35px">日</th>
-    <th width="100px">From</th>
-    <th width="100px">Via</th>
-    <th width="100px">To</th>
-    <th width="80px">交通手段</th>
-    <th width="50px">回数</th>
-    <th width="55px">立替</th>
-    <th width="50px">JobC</th>
-    <th width="65px">単価</th>
-    <th width="65px">小計</th>
-    <th width="60x">RefNo</th>
-    <th width="40px">承認</th>
-    <th width="40px">却下</th>
-    <th width="185px">コメント</th>
+    <th width="8%">ステータス</th>
+    <th width="3%">月</th>
+    <th width="3%">日</th>
+    <th width="9%">From</th>
+    <th width="9%">Via</th>
+    <th width="9%">To</th>
+    <th width="8%">交通手段</th>
+    <th width="4%">回数</th>
+    <th width="5%">立替</th>
+    <th width="5%">JobC</th>
+    <th width="5%">単価</th>
+    <th width="5%">小計</th>
+    <th width="5%">RefNo</th>
+    <th width="4%">承認</th>
+    <th width="4%">却下</th>
+    <th width="16%">コメント</th>
   </tr>
 </table>
 
@@ -71,38 +71,38 @@
   <table>
     <% for(let i in status) { %> 
     <tr>
-      <td width="100px" class="first" rowspan="2"><%=status[i] %></td>
-      <td width="35px"><%=month[i] %></td>
-      <td width="35px"><%=day[i] %></td>
-      <td width="100px"><%=trans_from[i] %></td>
-      <td width="100px"><%=trans_waypoint[i] %></td>
-      <td width="100px"><%=trans_to[i] %></td>
-      <td width="80px"><%=trans_type[i] %></td>
-      <td width="50px"><%=count[i] %></td>
-      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
-      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
-      <td width="65px" bgcolor="lightgrey"><%= amount[i] %></td>
-      <td width="65px" bgcolor="lightgrey"><%= subtotal[i] %></td>
-      <td width="60px" bgcolor="lightgrey"><%=ref_no[i] %></td>
-      <td width="40px" class="first" rowspan="2">
+      <td width="8%" class="first" rowspan="2"><%=status[i] %></td>
+      <td width="3%"><%=month[i] %></td>
+      <td width="3%"><%=day[i] %></td>
+      <td width="9%"><%=trans_from[i] %></td>
+      <td width="9%"><%=trans_waypoint[i] %></td>
+      <td width="9%"><%=trans_to[i] %></td>
+      <td width="8%"><%=trans_type[i] %></td>
+      <td width="4%"><%=count[i] %></td>
+      <td width="5%"><input id="chkbox0" type="checkbox"/></td>
+      <td width="5%"><input id="chkbox0" type="checkbox"/></td>
+      <td width="5%" class="greyout"><%= amount[i] %></td>
+      <td width="5%" class="greyout"><%= subtotal[i] %></td>
+      <td width="5%" class="greyout"><%=ref_no[i] %></td>
+      <td width="4%" class="first" rowspan="2">
         <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
       </td>
-      <td width="40px" class="first" rowspan="2">
+      <td width="4%" class="first" rowspan="2">
         <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
       </td>
-      <td width="185px" class="first" rowspan="2">
-        <input type="text" class='form-control'/>
+      <td width="16%" class="first" rowspan="2">
+        <input type="text" class='textsize'/>
       </td>
     </tr>
     <tr>
-      <td class="comment" colspan="20"><%=remarks %></td>
+      <td class="comment" colspan="12"><%=remarks %></td>
     </tr>
     <% } %>
   </table>
 
 <div class="box">
   <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
-  <input type="button" id="b3" name='b3' value="全解除" class="allcheck" onClick="allcheckout(set)">
+  <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set)">
   <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
 </div>
 
