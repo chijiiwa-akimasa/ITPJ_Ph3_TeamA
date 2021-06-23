@@ -7,7 +7,7 @@ var router = express.Router();
 var {Client}=require('pg');
 
 
-let passward = 'Psklt@363'
+let password = 'Psklt@363'
 
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
