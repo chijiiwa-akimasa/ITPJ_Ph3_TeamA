@@ -7,6 +7,9 @@ var router = express.Router();
 var {Client}=require('pg');
 
 
+let passward = 'Psklt@363'
+
+
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
 var yyyy = date.getFullYear();
@@ -30,7 +33,7 @@ router.get('/', async function(req, res, next) {
     user:'postgres',
     host:'localhost',
     database:'itpjph3',
-    password:'Psklt@363',
+    password:password,
     port:5432,
   });
 
@@ -61,6 +64,7 @@ router.get('/', async function(req, res, next) {
     var trans_waypoint=[];
     var amount=[];
     var count=[];
+    var subtotal=[];
     var job_no=[];
     var job_manager=[];
     var claim_flag=[];
@@ -82,9 +86,12 @@ router.get('/', async function(req, res, next) {
       trans_type[i]=result.rows[i].trans_type;
       trans_from[i]=result.rows[i].trans_from;
       trans_to[i]=result.rows[i].trans_to;
-      day[i]=result.rows[i].month + '/' +result.rows[i].day;
+      trans_waypoint[i]=result.rows[i].trans_waypoint;
+      month[i]=result.rows[i].month;
+      day[i]=result.rows[i].day;
       amount[i]=result.rows[i].amount;
       count[i]=result.rows[i].count;
+      subtotal[i]=result.rows[i].amount*result.rows[i].count;
       claim_flag[i]=result.rows[i].claim_flag;
       charge_flag[i]=result.rows[i].charge_flag;      
       remarks[i]=result.rows[i].remarks;
@@ -121,26 +128,29 @@ router.get('/', async function(req, res, next) {
 
 // }
 
-    let opt ={
-      title:'JM承認画面',
-      h3:nn+'月分の申請データを表示しています',
-      day:day,
-      trans_type:trans_type,
-      trans_from:trans_from,
-      trans_to:trans_to,
-      amount:amount,
-      count:count, 
-      subtotal:amount,
-      claim_flag:claim_flag,
-      charge_flag:charge_flag,
-      ref_no:ref_no,
-      status:status,
-      remarks:remarks,
-      radioname:radioname,
-      hiddenmonth:nn,
-      job_no:job_no,
-      emp_no:emp_no,
-    }
+  let opt ={
+    title:'JM承認画面',
+    year:yyyy,
+    nowmonth:nn,
+    month:month,
+    day:day,
+    trans_type:trans_type,
+    trans_from:trans_from,
+    trans_waypoint:trans_waypoint,
+    trans_to:trans_to,
+    amount:amount,
+    count:count, 
+    subtotal:subtotal,
+    claim_flag:claim_flag,
+    charge_flag:charge_flag,
+    ref_no:ref_no,
+    status:status,
+    remarks:remarks,
+    radioname:radioname,
+    hiddenmonth:nn,
+    job_no:job_no,
+    emp_no:emp_no,
+  }
 
     //レンダーする
     res.render('jmkotsuhi', opt);
@@ -164,7 +174,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:password,
       port:5432,
     });
 
@@ -181,64 +191,71 @@ router.post('/',async function(req,response,next){
     client.query(sql,(err,result)=>{
 
       //定義
-      var emp_no=[];
-      var sheet_year=[];
-      var sheet_month=[];
-      var branch_no=[];
-      var year=[];
-      var month=[];
-      var day=[];
-      var trans_type=[];
-      var trans_from=[];
-      var trans_to=[];
-      var trans_waypoint=[];
-      var amount=[];
-      var count=[];
-      var job_no=[];
-      var job_manager=[];
-      var claim_flag=[];
-      var charge_flag=[];
-      var ref_no=[];
-      var status=[];
-      var remarks=[];
-      var new0=[];
-      var new_date=[];
-      var renew=[];
-      var renew_date=[];
-      var radioname=[];
-      var hiddenmonth=[];
+    var emp_no=[];
+    var sheet_year=[];
+    var sheet_month=[];
+    var branch_no=[];
+    var year=[];
+    var month=[];
+    var day=[];
+    var trans_type=[];
+    var trans_from=[];
+    var trans_to=[];
+    var trans_waypoint=[];
+    var amount=[];
+    var count=[];
+    var subtotal=[];
+    var job_no=[];
+    var job_manager=[];
+    var claim_flag=[];
+    var charge_flag=[];
+    var ref_no=[];
+    var status=[];
+    var remarks=[];
+    var new0=[];
+    var new_date=[];
+    var renew=[];
+    var renew_date=[];
+    var radioname=[];
+    var hiddenmonth=[];
 
-      for(var i in result.rows){
+    for(var i in result.rows){
+    
+      status[i]=result.rows[i].status; 
+      ref_no[i]=result.rows[i].ref_no;
+      trans_type[i]=result.rows[i].trans_type;
+      trans_from[i]=result.rows[i].trans_from;
+      trans_to[i]=result.rows[i].trans_to;
+      trans_waypoint[i]=result.rows[i].trans_waypoint;
+      month[i]=result.rows[i].month;
+      day[i]=result.rows[i].day;
+      amount[i]=result.rows[i].amount;
+      count[i]=result.rows[i].count;
+      subtotal[i]=result.rows[i].amount*result.rows[i].count;
+      claim_flag[i]=result.rows[i].claim_flag;
+      charge_flag[i]=result.rows[i].charge_flag;      
+      remarks[i]=result.rows[i].remarks;
+      radioname[i]='radioname' +[i];
+      job_no[i]=result.rows[i].job_no;   
+      emp_no[i]=result.rows[i].emp_no;
       
-        status[i]=result.rows[i].status; 
-        ref_no[i]=result.rows[i].ref_no;
-        trans_type[i]=result.rows[i].trans_type;
-        trans_from[i]=result.rows[i].trans_from;
-        trans_to[i]=result.rows[i].trans_to;
-        day[i]=result.rows[i].month + '/' +result.rows[i].day;
-        amount[i]=result.rows[i].amount;
-        count[i]=result.rows[i].count;
-        claim_flag[i]=result.rows[i].claim_flag;
-        charge_flag[i]=result.rows[i].charge_flag;      
-        remarks[i]=result.rows[i].remarks;
-        radioname[i]='radioname' +[i];
-        job_no[i]=result.rows[i].job_no;
-        emp_no[i]=result.rows[i].emp_no;
-
-      } //for締める
+    } //for締める
 
       client.end();
 
-      let opt1 ={
+      let opt ={
         title:'JM承認画面',
-        h3:nn + '月分の申請データを表示しています',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
         day:day,
         trans_type:trans_type,
         trans_from:trans_from,
+        trans_waypoint:trans_waypoint,
         trans_to:trans_to,
         amount:amount,
         count:count, 
-        subtotal:amount*count,
+        subtotal:subtotal,
         claim_flag:claim_flag,
         charge_flag:charge_flag,
         ref_no:ref_no,
@@ -251,7 +268,7 @@ router.post('/',async function(req,response,next){
       }
 
       //レンダーする
-      response.render('jmkotsuhi', opt1);
+      response.render('jmkotsuhi', opt);
 
     });//client.query締める
   } //req.body.previousmonth締める
@@ -267,7 +284,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:password,
       port:5432,
     });
 
@@ -295,6 +312,7 @@ router.post('/',async function(req,response,next){
       var trans_waypoint=[];
       var amount=[];
       var count=[];
+      var subtotal=[];
       var job_no=[];
       var job_manager=[];
       var claim_flag=[];
@@ -310,36 +328,42 @@ router.post('/',async function(req,response,next){
       var hiddenmonth=[];
       
       for(var i in result.rows){
-      
+    
         status[i]=result.rows[i].status; 
         ref_no[i]=result.rows[i].ref_no;
         trans_type[i]=result.rows[i].trans_type;
         trans_from[i]=result.rows[i].trans_from;
         trans_to[i]=result.rows[i].trans_to;
-        day[i]=result.rows[i].month + '/' +result.rows[i].day;
+        trans_waypoint[i]=result.rows[i].trans_waypoint;
+        month[i]=result.rows[i].month;
+        day[i]=result.rows[i].day;
         amount[i]=result.rows[i].amount;
         count[i]=result.rows[i].count;
+        subtotal[i]=result.rows[i].amount*result.rows[i].count;
         claim_flag[i]=result.rows[i].claim_flag;
         charge_flag[i]=result.rows[i].charge_flag;      
         remarks[i]=result.rows[i].remarks;
         radioname[i]='radioname' +[i];
-        job_no[i]=result.rows[i].job_no;
+        job_no[i]=result.rows[i].job_no;   
         emp_no[i]=result.rows[i].emp_no;
-
+        
       } //for締める
 
       client.end();
 
-      let opt2 ={
+      let opt ={
         title:'JM承認画面',
-        h3:nn + '月分の申請データを表示しています',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
         day:day,
         trans_type:trans_type,
         trans_from:trans_from,
+        trans_waypoint:trans_waypoint,
         trans_to:trans_to,
         amount:amount,
         count:count, 
-        subtotal:amount*count,
+        subtotal:subtotal,
         claim_flag:claim_flag,
         charge_flag:charge_flag,
         ref_no:ref_no,
@@ -352,7 +376,7 @@ router.post('/',async function(req,response,next){
       }
 
       //レンダーする
-      response.render('jmkotsuhi', opt2);
+      response.render('jmkotsuhi', opt);
     
     });//client.query締める
   } //req.body.nextmonth締める
@@ -398,6 +422,8 @@ router.post('/',async function(req,response,next){
     //for文で回すために、連想配列(req.body)を配列に変換している
     for(let [key, value] of Object.entries(req.body)){
 
+      console.log(req.body);
+
       //承認にチェックがあるとき
       if(value==='1'){
         mailsend('【EX WEB】承認のお知らせ','交通費申請項目の中に承認されたものがあります（ジョブマネジャーによる承認）。内容をご確認ください。');}
@@ -412,7 +438,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:password,
       port:5432,
     });
 
@@ -428,65 +454,72 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-      //定義
-      var emp_no=[];
-      var sheet_year=[];
-      var sheet_month=[];
-      var branch_no=[];
-      var year=[];
-      var month=[];
-      var day=[];
-      var trans_type=[];
-      var trans_from=[];
-      var trans_to=[];
-      var trans_waypoint=[];
-      var amount=[];
-      var count=[];
-      var job_no=[];
-      var job_manager=[];
-      var claim_flag=[];
-      var charge_flag=[];
-      var ref_no=[];
-      var status=[];
-      var remarks=[];
-      var new0=[];
-      var new_date=[];
-      var renew=[];
-      var renew_date=[];
-      var radioname=[];
-      var hiddenmonth=[];
+            //定義
+    var emp_no=[];
+    var sheet_year=[];
+    var sheet_month=[];
+    var branch_no=[];
+    var year=[];
+    var month=[];
+    var day=[];
+    var trans_type=[];
+    var trans_from=[];
+    var trans_to=[];
+    var trans_waypoint=[];
+    var amount=[];
+    var count=[];
+    var subtotal=[];
+    var job_no=[];
+    var job_manager=[];
+    var claim_flag=[];
+    var charge_flag=[];
+    var ref_no=[];
+    var status=[];
+    var remarks=[];
+    var new0=[];
+    var new_date=[];
+    var renew=[];
+    var renew_date=[];
+    var radioname=[];
+    var hiddenmonth=[];
 
-      for(var i in result.rows){
+    for(var i in result.rows){
+    
+      status[i]=result.rows[i].status; 
+      ref_no[i]=result.rows[i].ref_no;
+      trans_type[i]=result.rows[i].trans_type;
+      trans_from[i]=result.rows[i].trans_from;
+      trans_to[i]=result.rows[i].trans_to;
+      trans_waypoint[i]=result.rows[i].trans_waypoint;
+      month[i]=result.rows[i].month;
+      day[i]=result.rows[i].day;
+      amount[i]=result.rows[i].amount;
+      count[i]=result.rows[i].count;
+      subtotal[i]=result.rows[i].amount*result.rows[i].count;
+      claim_flag[i]=result.rows[i].claim_flag;
+      charge_flag[i]=result.rows[i].charge_flag;      
+      remarks[i]=result.rows[i].remarks;
+      radioname[i]='radioname' +[i];
+      job_no[i]=result.rows[i].job_no;   
+      emp_no[i]=result.rows[i].emp_no;
       
-        status[i]=result.rows[i].status; 
-        ref_no[i]=result.rows[i].ref_no;
-        trans_type[i]=result.rows[i].trans_type;
-        trans_from[i]=result.rows[i].trans_from;
-        trans_to[i]=result.rows[i].trans_to;
-        day[i]=result.rows[i].month + '/' +result.rows[i].day;
-        amount[i]=result.rows[i].amount;
-        count[i]=result.rows[i].count;       
-        claim_flag[i]=result.rows[i].claim_flag;
-        charge_flag[i]=result.rows[i].charge_flag;      
-        remarks[i]=result.rows[i].remarks;
-        radioname[i]='radioname' +[i];
-        job_no[i]=result.rows[i].job_no;   
-        emp_no[i]=result.rows[i].emp_no;
-
-      } //for締める
+    } //for締める
 
       client.end();
 
       let opt ={
         title:'JM承認画面',
-        h3:nn+'月分の申請データを表示しています',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
         day:day,
         trans_type:trans_type,
         trans_from:trans_from,
+        trans_waypoint:trans_waypoint,
         trans_to:trans_to,
         amount:amount,
         count:count, 
-        subtotal:amount*count,
+        subtotal:subtotal,
         claim_flag:claim_flag,
         charge_flag:charge_flag,
         ref_no:ref_no,
