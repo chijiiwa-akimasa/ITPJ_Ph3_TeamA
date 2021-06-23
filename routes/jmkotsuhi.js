@@ -8,7 +8,6 @@ var {Client}=require('pg');
 
 const password = 'Psklt@363';
 
-
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
 var yyyy = date.getFullYear();
@@ -103,7 +102,7 @@ router.get('/', async function(req, res, next) {
     client.end();
 
   let opt ={
-    title:'JM承認画面',
+    title:'JM承認 - 交通費',
     year:yyyy,
     nowmonth:nn,
     month:month,
@@ -218,7 +217,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
   let opt ={
-    title:'JM承認画面',
+    title:'JM承認 - 交通費',
     year:yyyy,
     nowmonth:nn,
     month:month,
@@ -326,7 +325,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
   let opt ={
-    title:'JM承認画面',
+    title:'JM承認 - 交通費',
     year:yyyy,
     nowmonth:nn,
     month:month,
@@ -482,7 +481,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
     let opt ={
-      title:'JM承認画面',
+      title:'JM承認 - 交通費',
       year:yyyy,
       nowmonth:nn,
       month:month,
@@ -511,15 +510,6 @@ router.post('/',async function(req,response,next){
     });//client.connect締める
  } //if(req.body.confirm)を締める
 }) //router.post締める
-
-
-
-
-
-
-
-
-
 
 //const user=process.env.USER;
 //const dbpassword=process.env.PASSWORD;
