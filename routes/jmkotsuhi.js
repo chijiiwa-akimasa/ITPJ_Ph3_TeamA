@@ -6,8 +6,7 @@ const { options } = require('.');
 var router = express.Router();
 var {Client}=require('pg');
 
-
-let passward = 'Psklt@363'
+const password = 'Psklt@363';
 
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
@@ -103,31 +102,6 @@ router.get('/', async function(req, res, next) {
 
     client.end();
 
-
-// for (let i = 0; i < status.length; i++) {
-//   console.log(status[i]);
-
-//   if(status==='00'){
-//     return status[i] = '未申請';
-//   }
-//   else if(status==='11'){
-//     return status[i] = 'JM申請中';
-//   }
-//   else if(status==='19'){
-//     return status[i] = 'JM却下';
-//   }
-//   else if(status==='21'){
-//     return status[i] = '経理申請中';
-//   }
-//   else if(status==='29'){
-//     return status[i] = '経理却下';
-//   }
-//   else if(status==='88'){
-//     return status[i] = '承認';
-//   }
-
-// }
-
   let opt ={
     title:'JM承認画面',
     year:yyyy,
@@ -190,7 +164,7 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-      //定義
+    //定義
     var emp_no=[];
     var sheet_year=[];
     var sheet_month=[];
@@ -241,31 +215,31 @@ router.post('/',async function(req,response,next){
       
     } //for締める
 
-      client.end();
+    client.end();
 
-      let opt ={
-        title:'JM承認画面',
-        year:yyyy,
-        nowmonth:nn,
-        month:month,
-        day:day,
-        trans_type:trans_type,
-        trans_from:trans_from,
-        trans_waypoint:trans_waypoint,
-        trans_to:trans_to,
-        amount:amount,
-        count:count, 
-        subtotal:subtotal,
-        claim_flag:claim_flag,
-        charge_flag:charge_flag,
-        ref_no:ref_no,
-        status:status,
-        remarks:remarks,
-        radioname:radioname,
-        hiddenmonth:nn,
-        job_no:job_no,
-        emp_no:emp_no,
-      }
+  let opt ={
+    title:'JM承認画面',
+    year:yyyy,
+    nowmonth:nn,
+    month:month,
+    day:day,
+    trans_type:trans_type,
+    trans_from:trans_from,
+    trans_waypoint:trans_waypoint,
+    trans_to:trans_to,
+    amount:amount,
+    count:count, 
+    subtotal:subtotal,
+    claim_flag:claim_flag,
+    charge_flag:charge_flag,
+    ref_no:ref_no,
+    status:status,
+    remarks:remarks,
+    radioname:radioname,
+    hiddenmonth:nn,
+    job_no:job_no,
+    emp_no:emp_no,
+  }
 
       //レンダーする
       response.render('jmkotsuhi', opt);
@@ -298,82 +272,82 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-      //定義
-      var emp_no=[];
-      var sheet_year=[];
-      var sheet_month=[];
-      var branch_no=[];
-      var year=[];
-      var month=[];
-      var day=[];
-      var trans_type=[];
-      var trans_from=[];
-      var trans_to=[];
-      var trans_waypoint=[];
-      var amount=[];
-      var count=[];
-      var subtotal=[];
-      var job_no=[];
-      var job_manager=[];
-      var claim_flag=[];
-      var charge_flag=[];
-      var ref_no=[];
-      var status=[];
-      var remarks=[];
-      var new0=[];
-      var new_date=[];
-      var renew=[];
-      var renew_date=[];
-      var radioname=[];
-      var hiddenmonth=[];
-      
-      for(var i in result.rows){
+     //定義
+    var emp_no=[];
+    var sheet_year=[];
+    var sheet_month=[];
+    var branch_no=[];
+    var year=[];
+    var month=[];
+    var day=[];
+    var trans_type=[];
+    var trans_from=[];
+    var trans_to=[];
+    var trans_waypoint=[];
+    var amount=[];
+    var count=[];
+    var subtotal=[];
+    var job_no=[];
+    var job_manager=[];
+    var claim_flag=[];
+    var charge_flag=[];
+    var ref_no=[];
+    var status=[];
+    var remarks=[];
+    var new0=[];
+    var new_date=[];
+    var renew=[];
+    var renew_date=[];
+    var radioname=[];
+    var hiddenmonth=[];
+
+    for(var i in result.rows){
     
-        status[i]=result.rows[i].status; 
-        ref_no[i]=result.rows[i].ref_no;
-        trans_type[i]=result.rows[i].trans_type;
-        trans_from[i]=result.rows[i].trans_from;
-        trans_to[i]=result.rows[i].trans_to;
-        trans_waypoint[i]=result.rows[i].trans_waypoint;
-        month[i]=result.rows[i].month;
-        day[i]=result.rows[i].day;
-        amount[i]=result.rows[i].amount;
-        count[i]=result.rows[i].count;
-        subtotal[i]=result.rows[i].amount*result.rows[i].count;
-        claim_flag[i]=result.rows[i].claim_flag;
-        charge_flag[i]=result.rows[i].charge_flag;      
-        remarks[i]=result.rows[i].remarks;
-        radioname[i]='radioname' +[i];
-        job_no[i]=result.rows[i].job_no;   
-        emp_no[i]=result.rows[i].emp_no;
-        
-      } //for締める
+      status[i]=result.rows[i].status; 
+      ref_no[i]=result.rows[i].ref_no;
+      trans_type[i]=result.rows[i].trans_type;
+      trans_from[i]=result.rows[i].trans_from;
+      trans_to[i]=result.rows[i].trans_to;
+      trans_waypoint[i]=result.rows[i].trans_waypoint;
+      month[i]=result.rows[i].month;
+      day[i]=result.rows[i].day;
+      amount[i]=result.rows[i].amount;
+      count[i]=result.rows[i].count;
+      subtotal[i]=result.rows[i].amount*result.rows[i].count;
+      claim_flag[i]=result.rows[i].claim_flag;
+      charge_flag[i]=result.rows[i].charge_flag;      
+      remarks[i]=result.rows[i].remarks;
+      radioname[i]='radioname' +[i];
+      job_no[i]=result.rows[i].job_no;   
+      emp_no[i]=result.rows[i].emp_no;
+      
+    } //for締める
 
-      client.end();
+    client.end();
 
-      let opt ={
-        title:'JM承認画面',
-        year:yyyy,
-        nowmonth:nn,
-        month:month,
-        day:day,
-        trans_type:trans_type,
-        trans_from:trans_from,
-        trans_waypoint:trans_waypoint,
-        trans_to:trans_to,
-        amount:amount,
-        count:count, 
-        subtotal:subtotal,
-        claim_flag:claim_flag,
-        charge_flag:charge_flag,
-        ref_no:ref_no,
-        status:status,
-        remarks:remarks,
-        radioname:radioname,
-        hiddenmonth:nn,
-        job_no:job_no,
-        emp_no:emp_no,
-      }
+  let opt ={
+    title:'JM承認画面',
+    year:yyyy,
+    nowmonth:nn,
+    month:month,
+    day:day,
+    trans_type:trans_type,
+    trans_from:trans_from,
+    trans_waypoint:trans_waypoint,
+    trans_to:trans_to,
+    amount:amount,
+    count:count, 
+    subtotal:subtotal,
+    claim_flag:claim_flag,
+    charge_flag:charge_flag,
+    ref_no:ref_no,
+    status:status,
+    remarks:remarks,
+    radioname:radioname,
+    hiddenmonth:nn,
+    job_no:job_no,
+    emp_no:emp_no,
+  }
 
       //レンダーする
       response.render('jmkotsuhi', opt);
@@ -454,7 +428,7 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-            //定義
+    //定義
     var emp_no=[];
     var sheet_year=[];
     var sheet_month=[];
@@ -505,31 +479,31 @@ router.post('/',async function(req,response,next){
       
     } //for締める
 
-      client.end();
+    client.end();
 
-      let opt ={
-        title:'JM承認画面',
-        year:yyyy,
-        nowmonth:nn,
-        month:month,
-        day:day,
-        trans_type:trans_type,
-        trans_from:trans_from,
-        trans_waypoint:trans_waypoint,
-        trans_to:trans_to,
-        amount:amount,
-        count:count, 
-        subtotal:subtotal,
-        claim_flag:claim_flag,
-        charge_flag:charge_flag,
-        ref_no:ref_no,
-        status:status,
-        remarks:remarks,
-        radioname:radioname,
-        hiddenmonth:nn,
-        job_no:job_no,
-        emp_no:emp_no,
-      }
+    let opt ={
+      title:'JM承認画面',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
+      day:day,
+      trans_type:trans_type,
+      trans_from:trans_from,
+      trans_waypoint:trans_waypoint,
+      trans_to:trans_to,
+      amount:amount,
+      count:count, 
+      subtotal:subtotal,
+      claim_flag:claim_flag,
+      charge_flag:charge_flag,
+      ref_no:ref_no,
+      status:status,
+      remarks:remarks,
+      radioname:radioname,
+      hiddenmonth:nn,
+      job_no:job_no,
+      emp_no:emp_no,
+    }
 
       //レンダーする
       response.render('jmkotsuhi', opt);
