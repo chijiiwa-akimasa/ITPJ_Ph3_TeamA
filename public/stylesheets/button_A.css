@@ -86,24 +86,26 @@ button.next:hover {
   height: 30px;
   font-size: 14px;
   border-radius: 7px; /* 角の丸み */
+  position: absolute;
+  right: 215px;
+  top: 5px;
 }
-.allcheck:hover {
+.allcheck2 { /* すべてチェック */
+  margin: 5px 0 0 5px; /* 上 右 下 左 */
+  background: #ffffff;
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 7px; /* 角の丸み */
+  position: absolute;
+  right: 125px;
+  top: 5px;
+}
+.allcheck2:hover {
   color: #ffffff;
   background: #002b49;
 }
 
-.send_mail { /* 確定ボタン */
-  color: #002b49;
-  background: #ffffff;
-  width: 160px;
-  height: 30px;
-  font-size: 14px;
-  border-radius: 7px; /* 角の丸み */
-  border-color: #002b49;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
 .send_mail:hover {
   color: #ffffff;
   background: #002b49;

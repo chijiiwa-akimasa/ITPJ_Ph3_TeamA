@@ -98,7 +98,7 @@ router.get('/',async function(req, res, next) {
     client.end();
 
     let opt ={
-      title:'JM承認画面',
+      title:'JM承認 - 経費',
       year:yyyy,
       nowmonth:nn,
       month:month,
@@ -204,7 +204,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
     let opt ={
-      title:'JM承認画面',
+      title:'JM承認 - 経費',
       year:yyyy,
       nowmonth:nn,
       month:month,
@@ -304,7 +304,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
     let opt ={
-      title:'JM承認画面',
+      title:'JM承認 - 経費',
       year:yyyy,
       nowmonth:nn,
       month:month,
@@ -450,7 +450,7 @@ router.post('/',async function(req,response,next){
     client.end();
 
     let opt ={
-      title:'JM承認画面',
+      title:'JM承認 - 経費',
       year:yyyy,
       nowmonth:nn,
       month:month,
