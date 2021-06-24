@@ -50,7 +50,7 @@ router.get('/', async function(req, res, next) {
 
     //各クエリ文を定義
     let sql0 = "SELECT * from Job";
-    let sql1 = "SELECT * FROM tedetail WHERE (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    let sql1 = "SELECT * FROM tedetail WHERE ((year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20')) AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
     let sql2 = "SELECT * FROM Employee";
     console.log(sql0);
     console.log(sql1);
@@ -142,7 +142,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE ((year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20')) AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);
@@ -216,7 +216,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE ((year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20')) AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);
@@ -336,13 +336,58 @@ router.post('/',async function(req,res,next){
         //これは必ず必要
         await client.connect();
 
+        //条件を定義(承認の時)
+        var app;
+        if(req.body.approve!==undefined){
+            if(req.body.approve[0].length===1){
+              app=req.body.approve;
+            }
+            else if(req.body.approve.length>1){
+                var app2=[];
+                for(let i in req.body.approve){
+                    app2.push(req.body.approve[i]);
+                }
+                app=app2.join(" or ");
+            }
+        }
+
+        //条件を定義(承認の時)
+        var denied;
+        if(req.body.deny!==undefined){
+            if(req.body.deny[0].length===1){
+                denied=req.body.deny;
+            }
+            else if(req.body.deny.length>1){
+                var denied2=[];
+                for(let i in req.body.deny){
+                    denied2.push(req.body.deny[i]);
+                }
+                denied=denied2.join(" or ");
+            }
+        }
+
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE ((year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20')) AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
+        let sql3 = "UPDATE teDetail set status='21' where " + app;
+        let sql4 = "UPDATE teDetail set status='19' where " + denied;
         console.log(sql0);
         console.log(sql1);
         console.log(sql2);
+        console.log(sql3);
+        console.log(sql4);
+
+        for(let [key, value] of Object.entries(req.body)){
+            // 承認の場合、status='21'のアップデート文を実行
+            if(value==='1'){
+                client.query(sql3)
+            }
+            // 却下の場合、status='19'のアップデート文を実行
+            else if (value==='2'){
+                client.query(sql4)
+            }
+        }
 
         //ジョブコードをJobテーブルから取得（「ジョブ」検索時プルダウン）
         client.query(sql0, function (err, result) {
@@ -429,7 +474,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyy1+"' AND month='0"+m1+"' AND day>='"+d1+"') OR (year='"+yyy2+"' AND month='0"+m2+"' AND day<='"+d2+"') AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND ((year='"+yyy1+"' AND month='0"+m1+"' AND day='"+d1+"') OR (year='"+yyy2+"' AND month='0"+m2+"' AND day='"+d2+"')) AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);
@@ -438,9 +483,9 @@ router.post('/',async function(req,res,next){
         //ジョブコードをJobテーブルから取得（「ジョブ」検索時プルダウン）
         client.query(sql0, function(err, result){
         
-            let job = result.rows
+            let job = result.rows;
             for(let i = 0; i <= result.rows; i++){
-            job.push(result.rows[i])
+                job.push(result.rows[i])
             }
 
             //交通費詳細テーブル
