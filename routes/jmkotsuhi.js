@@ -85,7 +85,11 @@ router.get('/', async function(req, res, next) {
             for(let i = 0; i <= result.rows; i++){
 
               rireki.push(result.rows[i]);
-              radioname[i]='radioname' +[i];
+              // radioname[i]='radioname' +[i];
+          }
+
+          for(let i in rireki){
+            radioname[i]='"'+ 'radioname' +[i]+'"';
           }
 
           // for(var i in result.rows){
@@ -187,7 +191,11 @@ router.post('/',async function(req,res,next){
             for(let i = 0; i <= result.rows; i++){
 
               rireki.push(result.rows[i]);
-              radioname[i]='radioname' +[i];
+              // radioname[i]='radioname' +[i];
+          }
+
+          for(let i in rireki){
+            radioname[i]='"'+ 'radioname' +[i]+'"';
           }
 
           // for(var i in result.rows){
@@ -281,10 +289,14 @@ router.post('/',async function(req,res,next){
                var radioname = [];
    
                for(let i = 0; i <= result.rows; i++){
-   
-                 rireki.push(result.rows[i]);
-                 radioname[i]='radioname' +[i];
-             }
+
+                rireki.push(result.rows[i]);
+                // radioname[i]='radioname' +[i];
+            }
+  
+            for(let i in rireki){
+              radioname[i]='"'+ 'radioname' +[i]+'"';
+            }
    
             //  for(var i in result.rows){
             //    amount[i]=result.rows[i].amount;
@@ -442,9 +454,13 @@ router.post('/',async function(req,res,next){
               var radioname = [];
   
               for(let i = 0; i <= result.rows; i++){
-  
+
                 rireki.push(result.rows[i]);
-                radioname[i]='radioname' +[i];
+                // radioname[i]='radioname' +[i];
+            }
+  
+            for(let i in rireki){
+              radioname[i]='"'+ 'radioname' +[i]+'"';
             }
   
             // for(var i in result.rows){
@@ -556,9 +572,13 @@ router.post('/',async function(req,res,next){
 
           for(let i = 0; i <= result.rows; i++){
 
-              rireki.push(result.rows[i])
-              radioname[i]='radioname' +[i];
-          }
+            rireki.push(result.rows[i]);
+            // radioname[i]='radioname' +[i];
+        }
+
+        for(let i in rireki){
+          radioname[i]='"'+ 'radioname' +[i]+'"';
+        }
 
           // for(var i in result.rows){
           //   amount[i]=result.rows[i].amount;

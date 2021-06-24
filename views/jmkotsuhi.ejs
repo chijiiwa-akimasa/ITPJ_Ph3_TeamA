@@ -130,10 +130,10 @@
           <input type='hidden' name=<%- rireki[k].branch_no %>>
           <input type="hidden" class='form-control' value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'" name="approve" />
           <td width="40px" class="first" rowspan="2">
-            <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- rireki[k].radioname %> />
+            <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- radioname[k] %> />
           </td>
           <td width="40px" class="first" rowspan="2">
-            <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%- rireki[k].radioname %> />
+            <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%- radioname[k] %> />
           </td>
           <td width="16%" class="first" rowspan="2">
             <input type="text" class='textsize'/>
