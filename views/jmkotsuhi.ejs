@@ -108,7 +108,7 @@
           <td width="50px"><input id="chkbox0" type="checkbox"/></td>
           <td width="50px"><input id="chkbox0" type="checkbox"/></td>
           <td width="65px"><%- rireki[k].amount %></td>
-          <td width="65px"><%- subtotal[k] %></td>
+          <td width="65px"><%- rireki[k].amount*rireki[k].count %></td>
           <td width="60px"><%- rireki[k].ref_no %></td>
           <td width="40px" class="first" rowspan="2">
             <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- rireki[k].radioname %> />
