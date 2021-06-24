@@ -180,7 +180,7 @@ router.post('/',async function(req,res,next){
                 return sumsum + element;
               }, 0);
   
-              console.log(sum);
+              console.log(subtotal);
   
               client.end();
   
@@ -400,7 +400,7 @@ router.post('/',async function(req,res,next){
                 return sumsum + element;
               }, 0);
   
-              console.log(sum);
+              console.log(subtotal);
   
               client.end();
   
