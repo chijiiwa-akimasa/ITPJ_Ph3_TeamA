@@ -1,4 +1,4 @@
-<%- include("partials/header2") %>
+<%- include('partials/header2') %>
 
 <nav class="navbar">
   <ul class="top">
@@ -19,7 +19,7 @@
   </div>
 </form>
 
-<form action="/jmkotsuhi" method="post">
+<form action="/jmkotsuhi3" method="post">
   <div class="search_box">
     <input type="hidden" name="year" value="<%- year %>">
     <input type="hidden" name="month" value="<%- nowmonth %>">
@@ -73,48 +73,48 @@
       <p>該当データはありません</p>
     <% }else{ %> 
       <% for(var i=0;i<shain.length;i++){ %> 
-        <p><%- shain[i].emp_name %></p>
+        <p>社員名：<%- shain[i].emp_name %></p>
         <% jn=0; %> 
         <% for(var j=0;j<rireki.length;j++){ %>
           <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
             <p><%- rireki[j].job_no %></p>
             <% jn=rireki[j].job_no; %> 
             <% for(var k=0;k<rireki.length;k++){ %>
-                <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
+              <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
     
     <!-- データテーブル -->
       <table>
         <tr>
           <% if(rireki[k].status=="00"){ %>
           <td width="100px" class="first" rowspan="2">未申請</td>
-          <% }else if(rireki[k].status[k]=="11"){ %> 
+          <% }else if(rireki[k].status=="11"){ %> 
             <td width="100px" class="first" rowspan="2">JM申請中</td>
-          <% }else if(rireki[k].status[k]=="19"){ %> 
+          <% }else if(rireki[k].status=="19"){ %> 
             <td width="100px" class="first" rowspan="2">JM却下</td>
-          <% }else if(rireki[k].status[k]=="21"){ %>
+          <% }else if(rireki[k].status=="21"){ %>
             <td width="100px" class="first" rowspan="2">経理申請中</td>
-          <% }else if(rireki[k].status[k]=="29"){ %>
+          <% }else if(rireki[k].status=="29"){ %>
             <td width="100px" class="first" rowspan="2">経理却下</td>
-          <% }else if(rireki[k].status[k]=="88"){ %>  
+          <% }else if(rireki[k].status=="88"){ %>  
             <td width="100px" class="first" rowspan="2">承認</td>
           <% } %> 
-          <td width="35px"><%=rireki[k].month[k] %></td>
-          <td width="35px"><%=rireki[k].day[k] %></td>
-          <td width="100px"><%=rireki[k].trans_from[k] %></td>
-          <td width="100px"><%=rireki[k].trans_waypoint[k] %></td>
-          <td width="100px"><%=rireki[k].trans_to[k] %></td>
-          <td width="80px"><%=rireki[k].trans_type[k] %></td>
-          <td width="50px"><%=rireki[k].count[k] %></td>
+          <td width="35px"><%-rireki[k].month %></td>
+          <td width="35px"><%-rireki[k].day %></td>
+          <td width="100px"><%-rireki[k].trans_from %></td>
+          <td width="100px"><%-rireki[k].trans_waypoint %></td>
+          <td width="100px"><%-rireki[k].trans_to %></td>
+          <td width="80px"><%-rireki[k].trans_type %></td>
+          <td width="50px"><%-rireki[k].count %></td>
           <td width="50px"><input id="chkbox0" type="checkbox"/></td>
           <td width="50px"><input id="chkbox0" type="checkbox"/></td>
-          <td width="65px"><%= rireki[k].amount[k] %></td>
-          <td width="65px"><%= rireki[k].subtotal[k] %></td>
-          <td width="60px"><%= rireki[k].ref_no[k] %></td>
+          <td width="65px"><%- rireki[k].amount %></td>
+          <td width="65px"><%- rireki[k].subtotal %></td>
+          <td width="60px"><%- rireki[k].ref_no %></td>
           <td width="40px" class="first" rowspan="2">
-            <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[k] %> />
+            <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- rireki[k].radioname %> />
           </td>
           <td width="40px" class="first" rowspan="2">
-            <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[k] %> />
+            <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%- rireki[k].radioname %> />
           </td>
           <td width="16%" class="first" rowspan="2">
             <input type="text" class='textsize'/>
@@ -132,9 +132,9 @@
     <% } %> 
     
     <div class="box">
-      <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
-      <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set)">
-      <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
-    </div>
+        <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
+        <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set)">
+        <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
+      </div>
     
-    <%- include("partials/footer2") %>
+    <%- include('partials/footer2') %>
