@@ -76,11 +76,11 @@ router.get('/', async function(req, res, next) {
                 radioname[i]='radioname' +[i];
             }
 
-            for(var i in result.rows){
-              amount[i]=result.rows[i].amount;
-              count[i]=result.rows[i].count;
-              subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            }
+            // for(var i in result.rows){
+            //   amount[i]=result.rows[i].amount;
+            //   count[i]=result.rows[i].count;
+            //   subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            // }
 
             // 小計(subtotal)の配列をすべて足す
             // sum[i] = subtotal.reduce(function(sumsum, element){
@@ -95,7 +95,7 @@ router.get('/', async function(req, res, next) {
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                subtotal:subtotal,
+                subtotal:'',
                 sum:'',
                 radioname:radioname,
             }
@@ -159,11 +159,11 @@ router.post('/',async function(req,res,next){
                 radioname[i]='radioname' +[i];
             }
 
-            for(var i in result.rows){
-            amount[i]=result.rows[i].amount;
-            count[i]=result.rows[i].count;
-            subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            }
+            // for(var i in result.rows){
+            // amount[i]=result.rows[i].amount;
+            // count[i]=result.rows[i].count;
+            // subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            // }
 
             // 小計(subtotal)の配列をすべて足す
             // sum[i] = subtotal.reduce(function(sumsum, element){
@@ -178,7 +178,7 @@ router.post('/',async function(req,res,next){
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                subtotal:subtotal,
+                subtotal:'',
                 sum:'',
                 radioname:radioname,
             }
@@ -238,11 +238,11 @@ router.post('/',async function(req,res,next){
                 radioname[i]='radioname' +[i];
             }
 
-            for(var i in result.rows){
-              amount[i]=result.rows[i].amount;
-              count[i]=result.rows[i].count;
-              subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            }
+            // for(var i in result.rows){
+            //   amount[i]=result.rows[i].amount;
+            //   count[i]=result.rows[i].count;
+            //   subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            // }
 
             // 小計(subtotal)の配列をすべて足す
             // sum[i] = subtotal.reduce(function(sumsum, element){
@@ -257,7 +257,7 @@ router.post('/',async function(req,res,next){
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                subtotal:subtotal,
+                subtotal:'',
                 sum:'',
                 radioname:radioname,
             }
@@ -367,11 +367,11 @@ router.post('/',async function(req,res,next){
                 radioname[i]='radioname' +[i];
             }
 
-            for(var i in result.rows){
-              amount[i]=result.rows[i].amount;
-              count[i]=result.rows[i].count;
-              subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            }
+            // for(var i in result.rows){
+            //   amount[i]=result.rows[i].amount;
+            //   count[i]=result.rows[i].count;
+            //   subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            // }
 
             // 小計(subtotal)の配列をすべて足す
             // sum[i] = subtotal.reduce(function(sumsum, element){
@@ -386,7 +386,7 @@ router.post('/',async function(req,res,next){
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                subtotal:subtotal,
+                subtotal:'',
                 sum:'',
                 radioname:radioname,
             }
