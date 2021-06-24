@@ -6,6 +6,10 @@ const { options } = require('.');
 var router = express.Router();
 var {Client}=require('pg');
 
+require('dotenv').config();
+const user=process.env.USER;
+const dbpassword=process.env.PASSWORD;
+
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
@@ -29,7 +33,7 @@ router.get('/',async function(req, res, next) {
     user:'postgres',
     host:'localhost',
     database:'itpjph3',
-    password:'Psklt@363',
+    password:dbpassword,
     port:5432,
 });
 
@@ -93,31 +97,6 @@ router.get('/',async function(req, res, next) {
 
     client.end();
 
-
-  // for (let i = 0; i < status.length; i++) {
-  //   console.log(status[i]);
-
-  //   if(status==='00'){
-  //     return status[i] = '未申請';
-  //   }
-  //   else if(status==='11'){
-  //     return status[i] = 'JM申請中';
-  //   }
-  //   else if(status==='19'){
-  //     return status[i] = 'JM却下';
-  //   }
-  //   else if(status==='21'){
-  //     return status[i] = '経理申請中';
-  //   }
-  //   else if(status==='29'){
-  //     return status[i] = '経理却下';
-  //   }
-  //   else if(status==='88'){
-  //     return status[i] = '承認';
-  //   }
-
-  // }
-
     let opt ={
       title:'JM承認 - 経費',
       year:yyyy,
@@ -161,7 +140,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 
@@ -219,35 +198,35 @@ router.post('/',async function(req,response,next){
       emp_no[i]=result.rows[i].emp_no;
       summary[i]=result.rows[i].summary;
       payee[i]=result.rows[i].payee;
+      
+    } //for締める
 
-      } //for締める
+    client.end();
 
-      client.end();
+    let opt ={
+      title:'JM承認 - 経費',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
+      day:day,
+      amount:amount,
+      claim_flag:claim_flag,
+      charge_flag:charge_flag,
+      ref_no:ref_no,
+      status:status,
+      remarks:remarks,
+      radioname:radioname,
+      hiddenmonth:nn,
+      job_no:job_no,
+      emp_no:emp_no,
+      code_name: code_name,
+      summary:summary,
+      payee:payee,
 
-      let opt1 ={
-        title:'JM承認 - 経費',
-        year:yyyy,
-        nowmonth:nn,
-        month:month,
-        day:day,
-        amount:amount,
-        claim_flag:claim_flag,
-        charge_flag:charge_flag,
-        ref_no:ref_no,
-        status:status,
-        remarks:remarks,
-        radioname:radioname,
-        hiddenmonth:nn,
-        job_no:job_no,
-        emp_no:emp_no,
-        code_name: code_name,
-        summary:summary,
-        payee:payee,
-  
-      }
+    }
 
       //レンダーする
-      response.render('jmkehi', opt1);
+      response.render('jmkehi', opt);
 
     });//client.query締める
   } //req.body.previousmonth締める
@@ -263,7 +242,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 
@@ -277,7 +256,7 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-      //定義
+    //定義
     var emp_no=[];
     var sheet_year=[];
     var sheet_month=[];
@@ -319,34 +298,35 @@ router.post('/',async function(req,response,next){
       emp_no[i]=result.rows[i].emp_no;
       summary[i]=result.rows[i].summary;
       payee[i]=result.rows[i].payee;
+      
+    } //for締める
 
-      } //for締める
+    client.end();
 
-      client.end();
+    let opt ={
+      title:'JM承認 - 経費',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
+      day:day,
+      amount:amount,
+      claim_flag:claim_flag,
+      charge_flag:charge_flag,
+      ref_no:ref_no,
+      status:status,
+      remarks:remarks,
+      radioname:radioname,
+      hiddenmonth:nn,
+      job_no:job_no,
+      emp_no:emp_no,
+      code_name: code_name,
+      summary:summary,
+      payee:payee,
 
-      let opt2 ={
-        title:'JM承認 - 経費',
-        year:yyyy,
-        nowmonth:nn,
-        month:month,
-        day:day,
-        amount:amount,
-        claim_flag:claim_flag,
-        charge_flag:charge_flag,
-        ref_no:ref_no,
-        status:status,
-        remarks:remarks,
-        radioname:radioname,
-        hiddenmonth:nn,
-        job_no:job_no,
-        emp_no:emp_no,
-        code_name: code_name,
-        summary:summary,
-        payee:payee,
-      }
+    }
 
       //レンダーする
-      response.render('jmkehi', opt2);
+      response.render('jmkehi', opt);
     
     });//client.query締める
   } //req.body.nextmonth締める
@@ -406,7 +386,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 
@@ -464,7 +444,7 @@ router.post('/',async function(req,response,next){
       emp_no[i]=result.rows[i].emp_no;
       summary[i]=result.rows[i].summary;
       payee[i]=result.rows[i].payee;
-
+      
     } //for締める
 
     client.end();
@@ -488,6 +468,7 @@ router.post('/',async function(req,response,next){
       code_name: code_name,
       summary:summary,
       payee:payee,
+
     }
 
     //レンダーする

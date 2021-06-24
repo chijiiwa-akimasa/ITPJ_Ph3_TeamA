@@ -5,8 +5,11 @@ var nodemailer = require('nodemailer');
 const { options } = require('.');
 var router = express.Router();
 var {Client}=require('pg');
+const e = require('express');
 
-const password = 'Psklt@363';
+require('dotenv').config();
+const user=process.env.USER;
+const dbpassword=process.env.PASSWORD;
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
@@ -23,6 +26,25 @@ if (mm === 1 && dd<21) {
     yyyy -=1
 }
 
+
+/* Heroku・Postgres接続*/
+ /*router.get('/', function(req, res, next) {
+  const client =
+   (process.env.ENVIRONMENT == "LIVE") ? new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false 
+    }
+  }) :
+    new Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'TeDetail',
+    password: dbpassword,
+    port: 5432
+})
+ client.conect()　*/
+
 /* ページが読み込まれたとき */
 router.get('/', async function(req, res, next) {
 
@@ -31,7 +53,7 @@ router.get('/', async function(req, res, next) {
     user:'postgres',
     host:'localhost',
     database:'itpjph3',
-    password:password,
+    password:dbpassword,
     port:5432,
   });
 
@@ -39,96 +61,130 @@ router.get('/', async function(req, res, next) {
   mm = mm-1+1;
 
   //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
-  // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
   let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+  let sql1 = "SELECT * FROM Employee";
   console.log(sql);
+  console.log(sql1);
 
   //これは必ず必要
   await client.connect();
 
-  client.query(sql,(err,result)=>{
+  client.query(sql1,(err1,result1)=>{
 
-    //定義
-    var emp_no=[];
-    var sheet_year=[];
-    var sheet_month=[];
-    var branch_no=[];
-    var year=[];
-    var month=[];
-    var day=[];
-    var trans_type=[];
-    var trans_from=[];
-    var trans_to=[];
-    var trans_waypoint=[];
-    var amount=[];
-    var count=[];
-    var subtotal=[];
-    var job_no=[];
-    var job_manager=[];
-    var claim_flag=[];
-    var charge_flag=[];
-    var ref_no=[];
-    var status=[];
-    var remarks=[];
-    var new0=[];
-    var new_date=[];
-    var renew=[];
-    var renew_date=[];
-    var radioname=[];
-    var hiddenmonth=[];
+    var emp_no1=[];
+    var pw1=[];
+    var emp_name1=[];        
+    var emp_mail1=[];
+    var emp_position1=[];
+    var new_date1=[];
+    var renew1=[];
+    var renew_date1=[];
+    var shain=[];
 
-    for(var i in result.rows){
-    
-      status[i]=result.rows[i].status; 
-      ref_no[i]=result.rows[i].ref_no;
-      trans_type[i]=result.rows[i].trans_type;
-      trans_from[i]=result.rows[i].trans_from;
-      trans_to[i]=result.rows[i].trans_to;
-      trans_waypoint[i]=result.rows[i].trans_waypoint;
-      month[i]=result.rows[i].month;
-      day[i]=result.rows[i].day;
-      amount[i]=result.rows[i].amount;
-      count[i]=result.rows[i].count;
-      subtotal[i]=result.rows[i].amount*result.rows[i].count;
-      claim_flag[i]=result.rows[i].claim_flag;
-      charge_flag[i]=result.rows[i].charge_flag;      
-      remarks[i]=result.rows[i].remarks;
-      radioname[i]='radioname' +[i];
-      job_no[i]=result.rows[i].job_no;   
-      emp_no[i]=result.rows[i].emp_no;
+    for(var i in result1.rows){
       
+      emp_no1[i]=result1.rows[i].emp_no;
+      pw1[i]=result1.rows[i].pw;
+      emp_name1[i]=result1.rows[i].emp_name;
+      emp_mail1[i]=result1.rows[i].emp_mail;
+      emp_position1[i]=result1.rows[i].emp_position1;
+      new_date1[i]=result1.rows[i].new_date;
+      renew1[i]=result1.rows[i].renew;
+      renew_date1[i]=result1.rows[i].renew_date;
+      shain[i]=result1.rows[i];
+
     } //for締める
 
-    client.end();
+    client.query(sql,(err,result)=>{
 
-  let opt ={
-    title:'JM承認 - 交通費',
-    year:yyyy,
-    nowmonth:nn,
-    month:month,
-    day:day,
-    trans_type:trans_type,
-    trans_from:trans_from,
-    trans_waypoint:trans_waypoint,
-    trans_to:trans_to,
-    amount:amount,
-    count:count, 
-    subtotal:subtotal,
-    claim_flag:claim_flag,
-    charge_flag:charge_flag,
-    ref_no:ref_no,
-    status:status,
-    remarks:remarks,
-    radioname:radioname,
-    hiddenmonth:nn,
-    job_no:job_no,
-    emp_no:emp_no,
-  }
+      //定義
+      var emp_no=[];
+      var emp_name=[];
+      var month=[];
+      var day=[];
+      var trans_type=[];
+      var trans_from=[];
+      var trans_to=[];
+      var trans_waypoint=[];
+      var amount=[];
+      var count=[];
+      var subtotal=[];
+      var job_no=[];
+      var claim_flag=[];
+      var charge_flag=[];
+      var ref_no=[];
+      var status=[];
+      var remarks=[];
+      var radioname=[];
+      var rireki=[];
+      var sum=[];
+
+      for(var i in result.rows){
+      
+        status[i]=result.rows[i].status; 
+        ref_no[i]=result.rows[i].ref_no;
+        trans_type[i]=result.rows[i].trans_type;
+        trans_from[i]=result.rows[i].trans_from;
+        trans_to[i]=result.rows[i].trans_to;
+        trans_waypoint[i]=result.rows[i].trans_waypoint;
+        month[i]=result.rows[i].month;
+        day[i]=result.rows[i].day;
+        amount[i]=result.rows[i].amount;
+        count[i]=result.rows[i].count;
+        subtotal[i]=result.rows[i].amount*result.rows[i].count;
+        claim_flag[i]=result.rows[i].claim_flag;
+        charge_flag[i]=result.rows[i].charge_flag;      
+        remarks[i]=result.rows[i].remarks;
+        radioname[i]='radioname' +[i];
+        job_no[i]=result.rows[i].job_no;   
+        emp_no[i]=result.rows[i].emp_no;
+        emp_name[i]=result.rows[i].emp_name;
+        rireki[i]=result.rows[i];
+
+        //小計(subtotal)の配列をすべて足す
+        sum[i] = subtotal.reduce(function(sumsum, element){
+          return sumsum + element;
+        }, 0);
+
+      } //for締める
+
+    client.end();
+    console.log(sum);
+
+    let opt ={
+      title:'JM承認 - 交通費',
+      year:yyyy,
+      nowmonth:nn,
+      month:month,
+      day:day,
+      trans_type:trans_type,
+      trans_from:trans_from,
+      trans_waypoint:trans_waypoint,
+      trans_to:trans_to,
+      amount:amount,
+      count:count, 
+      subtotal:subtotal,
+      claim_flag:claim_flag,
+      charge_flag:charge_flag,
+      ref_no:ref_no,
+      status:status,
+      remarks:remarks,
+      radioname:radioname,
+      hiddenmonth:nn,
+      job_no:job_no,
+      emp_no:emp_no,
+      emp_no1:emp_no1,
+      emp_name1:emp_name1,
+      sum:sum,
+      rireki:rireki,
+      shain:shain,
+    }
 
     //レンダーする
     res.render('jmkotsuhi', opt);
 
-  });//client.connect締める
+  });//2つ目のclient.query締める
+});//1つ目のclient.query締める
 });//router.get締める
 
 
@@ -147,7 +203,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:password,
+      password:dbpassword,
       port:5432,
     });
 
@@ -155,7 +211,7 @@ router.post('/',async function(req,response,next){
 
     //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
     // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-    let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
     console.log(sql);
 
     //これは必ず必要
@@ -163,82 +219,92 @@ router.post('/',async function(req,response,next){
 
     client.query(sql,(err,result)=>{
 
-    //定義
-    var emp_no=[];
-    var sheet_year=[];
-    var sheet_month=[];
-    var branch_no=[];
-    var year=[];
-    var month=[];
-    var day=[];
-    var trans_type=[];
-    var trans_from=[];
-    var trans_to=[];
-    var trans_waypoint=[];
-    var amount=[];
-    var count=[];
-    var subtotal=[];
-    var job_no=[];
-    var job_manager=[];
-    var claim_flag=[];
-    var charge_flag=[];
-    var ref_no=[];
-    var status=[];
-    var remarks=[];
-    var new0=[];
-    var new_date=[];
-    var renew=[];
-    var renew_date=[];
-    var radioname=[];
-    var hiddenmonth=[];
+      //定義
+      var emp_no=[];
+      var emp_name=[];
+      var sheet_year=[];
+      var sheet_month=[];
+      var branch_no=[];
+      var year=[];
+      var month=[];
+      var day=[];
+      var trans_type=[];
+      var trans_from=[];
+      var trans_to=[];
+      var trans_waypoint=[];
+      var amount=[];
+      var count=[];
+      var subtotal=[];
+      var job_no=[];
+      var job_manager=[];
+      var claim_flag=[];
+      var charge_flag=[];
+      var ref_no=[];
+      var status=[];
+      var remarks=[];
+      var new0=[];
+      var new_date=[];
+      var renew=[];
+      var renew_date=[];
+      var radioname=[];
+      var hiddenmonth=[];
+      var total=[];
 
-    for(var i in result.rows){
-    
-      status[i]=result.rows[i].status; 
-      ref_no[i]=result.rows[i].ref_no;
-      trans_type[i]=result.rows[i].trans_type;
-      trans_from[i]=result.rows[i].trans_from;
-      trans_to[i]=result.rows[i].trans_to;
-      trans_waypoint[i]=result.rows[i].trans_waypoint;
-      month[i]=result.rows[i].month;
-      day[i]=result.rows[i].day;
-      amount[i]=result.rows[i].amount;
-      count[i]=result.rows[i].count;
-      subtotal[i]=result.rows[i].amount*result.rows[i].count;
-      claim_flag[i]=result.rows[i].claim_flag;
-      charge_flag[i]=result.rows[i].charge_flag;      
-      remarks[i]=result.rows[i].remarks;
-      radioname[i]='radioname' +[i];
-      job_no[i]=result.rows[i].job_no;   
-      emp_no[i]=result.rows[i].emp_no;
+      for(var i in result.rows){
       
-    } //for締める
+        status[i]=result.rows[i].status; 
+        ref_no[i]=result.rows[i].ref_no;
+        trans_type[i]=result.rows[i].trans_type;
+        trans_from[i]=result.rows[i].trans_from;
+        trans_to[i]=result.rows[i].trans_to;
+        trans_waypoint[i]=result.rows[i].trans_waypoint;
+        month[i]=result.rows[i].month;
+        day[i]=result.rows[i].day;
+        amount[i]=result.rows[i].amount;
+        count[i]=result.rows[i].count;
+        subtotal[i]=result.rows[i].amount*result.rows[i].count;
+        claim_flag[i]=result.rows[i].claim_flag;
+        charge_flag[i]=result.rows[i].charge_flag;      
+        remarks[i]=result.rows[i].remarks;
+        radioname[i]='radioname' +[i];
+        job_no[i]=result.rows[i].job_no;   
+        emp_no[i]=result.rows[i].emp_no;
+        emp_name[i]=result.rows[i].emp_name;
+        
+      } //for締める
 
-    client.end();
+      client.end();
 
-  let opt ={
-    title:'JM承認 - 交通費',
-    year:yyyy,
-    nowmonth:nn,
-    month:month,
-    day:day,
-    trans_type:trans_type,
-    trans_from:trans_from,
-    trans_waypoint:trans_waypoint,
-    trans_to:trans_to,
-    amount:amount,
-    count:count, 
-    subtotal:subtotal,
-    claim_flag:claim_flag,
-    charge_flag:charge_flag,
-    ref_no:ref_no,
-    status:status,
-    remarks:remarks,
-    radioname:radioname,
-    hiddenmonth:nn,
-    job_no:job_no,
-    emp_no:emp_no,
-  }
+      //小計(subtotal)の配列をすべて足す
+      let sum = subtotal.reduce(function(sumsum, element){
+        return sumsum + element;
+      }, 0);
+
+      let opt ={
+        title:'JM承認 - 交通費',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
+        day:day,
+        trans_type:trans_type,
+        trans_from:trans_from,
+        trans_waypoint:trans_waypoint,
+        trans_to:trans_to,
+        amount:amount,
+        count:count, 
+        subtotal:subtotal,
+        claim_flag:claim_flag,
+        charge_flag:charge_flag,
+        ref_no:ref_no,
+        status:status,
+        remarks:remarks,
+        radioname:radioname,
+        hiddenmonth:nn,
+        job_no:job_no,
+        emp_no:emp_no,
+        emp_name:emp_name,
+        sum:sum,
+      }
 
       //レンダーする
       response.render('jmkotsuhi', opt);
@@ -257,100 +323,110 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:password,
+      password:dbpassword,
       port:5432,
     });
 
     //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
     // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-    let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+    let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
     console.log(sql);
-    
+  
     //これは必ず必要
     await client.connect();
-
+  
     client.query(sql,(err,result)=>{
-
-     //定義
-    var emp_no=[];
-    var sheet_year=[];
-    var sheet_month=[];
-    var branch_no=[];
-    var year=[];
-    var month=[];
-    var day=[];
-    var trans_type=[];
-    var trans_from=[];
-    var trans_to=[];
-    var trans_waypoint=[];
-    var amount=[];
-    var count=[];
-    var subtotal=[];
-    var job_no=[];
-    var job_manager=[];
-    var claim_flag=[];
-    var charge_flag=[];
-    var ref_no=[];
-    var status=[];
-    var remarks=[];
-    var new0=[];
-    var new_date=[];
-    var renew=[];
-    var renew_date=[];
-    var radioname=[];
-    var hiddenmonth=[];
-
-    for(var i in result.rows){
-    
-      status[i]=result.rows[i].status; 
-      ref_no[i]=result.rows[i].ref_no;
-      trans_type[i]=result.rows[i].trans_type;
-      trans_from[i]=result.rows[i].trans_from;
-      trans_to[i]=result.rows[i].trans_to;
-      trans_waypoint[i]=result.rows[i].trans_waypoint;
-      month[i]=result.rows[i].month;
-      day[i]=result.rows[i].day;
-      amount[i]=result.rows[i].amount;
-      count[i]=result.rows[i].count;
-      subtotal[i]=result.rows[i].amount*result.rows[i].count;
-      claim_flag[i]=result.rows[i].claim_flag;
-      charge_flag[i]=result.rows[i].charge_flag;      
-      remarks[i]=result.rows[i].remarks;
-      radioname[i]='radioname' +[i];
-      job_no[i]=result.rows[i].job_no;   
-      emp_no[i]=result.rows[i].emp_no;
+  
+      //定義
+      var emp_no=[];
+      var emp_name=[];
+      var sheet_year=[];
+      var sheet_month=[];
+      var branch_no=[];
+      var year=[];
+      var month=[];
+      var day=[];
+      var trans_type=[];
+      var trans_from=[];
+      var trans_to=[];
+      var trans_waypoint=[];
+      var amount=[];
+      var count=[];
+      var subtotal=[];
+      var job_no=[];
+      var job_manager=[];
+      var claim_flag=[];
+      var charge_flag=[];
+      var ref_no=[];
+      var status=[];
+      var remarks=[];
+      var new0=[];
+      var new_date=[];
+      var renew=[];
+      var renew_date=[];
+      var radioname=[];
+      var hiddenmonth=[];
+      var total=[];
+  
+      for(var i in result.rows){
       
-    } //for締める
-
-    client.end();
-
-  let opt ={
-    title:'JM承認 - 交通費',
-    year:yyyy,
-    nowmonth:nn,
-    month:month,
-    day:day,
-    trans_type:trans_type,
-    trans_from:trans_from,
-    trans_waypoint:trans_waypoint,
-    trans_to:trans_to,
-    amount:amount,
-    count:count, 
-    subtotal:subtotal,
-    claim_flag:claim_flag,
-    charge_flag:charge_flag,
-    ref_no:ref_no,
-    status:status,
-    remarks:remarks,
-    radioname:radioname,
-    hiddenmonth:nn,
-    job_no:job_no,
-    emp_no:emp_no,
-  }
+        status[i]=result.rows[i].status; 
+        ref_no[i]=result.rows[i].ref_no;
+        trans_type[i]=result.rows[i].trans_type;
+        trans_from[i]=result.rows[i].trans_from;
+        trans_to[i]=result.rows[i].trans_to;
+        trans_waypoint[i]=result.rows[i].trans_waypoint;
+        month[i]=result.rows[i].month;
+        day[i]=result.rows[i].day;
+        amount[i]=result.rows[i].amount;
+        count[i]=result.rows[i].count;
+        subtotal[i]=result.rows[i].amount*result.rows[i].count;
+        claim_flag[i]=result.rows[i].claim_flag;
+        charge_flag[i]=result.rows[i].charge_flag;      
+        remarks[i]=result.rows[i].remarks;
+        radioname[i]='radioname' +[i];
+        job_no[i]=result.rows[i].job_no;   
+        emp_no[i]=result.rows[i].emp_no;
+        emp_name[i]=result.rows[i].emp_name;
+        
+      } //for締める
+  
+      client.end();
+  
+      //小計(subtotal)の配列をすべて足す
+      let sum = subtotal.reduce(function(sumsum, element){
+        return sumsum + element;
+      }, 0);
+  
+      let opt ={
+        title:'JM承認 - 交通費',
+        year:yyyy,
+        nowmonth:nn,
+        month:month,
+        day:day,
+        trans_type:trans_type,
+        trans_from:trans_from,
+        trans_waypoint:trans_waypoint,
+        trans_to:trans_to,
+        amount:amount,
+        count:count, 
+        subtotal:subtotal,
+        claim_flag:claim_flag,
+        charge_flag:charge_flag,
+        ref_no:ref_no,
+        status:status,
+        remarks:remarks,
+        radioname:radioname,
+        hiddenmonth:nn,
+        job_no:job_no,
+        emp_no:emp_no,
+        emp_name:emp_name,
+        sum:sum,
+      }
 
       //レンダーする
       response.render('jmkotsuhi', opt);
-    
+      
     });//client.query締める
   } //req.body.nextmonth締める
 
@@ -411,7 +487,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:password,
+      password:dbpassword,
       port:5432,
     });
 
@@ -419,16 +495,17 @@ router.post('/',async function(req,response,next){
     mm = mm-1+1;
 
     //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
-    let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-    console.log(sql);
+    let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+  console.log(sql);
 
-    //これは必ず必要
-    await client.connect();
+  //これは必ず必要
+  await client.connect();
 
-    client.query(sql,(err,result)=>{
+  client.query(sql,(err,result)=>{
 
     //定義
     var emp_no=[];
+    var emp_name=[];
     var sheet_year=[];
     var sheet_month=[];
     var branch_no=[];
@@ -455,6 +532,7 @@ router.post('/',async function(req,response,next){
     var renew_date=[];
     var radioname=[];
     var hiddenmonth=[];
+    var total=[];
 
     for(var i in result.rows){
     
@@ -475,10 +553,16 @@ router.post('/',async function(req,response,next){
       radioname[i]='radioname' +[i];
       job_no[i]=result.rows[i].job_no;   
       emp_no[i]=result.rows[i].emp_no;
+      emp_name[i]=result.rows[i].emp_name;
       
     } //for締める
 
     client.end();
+
+    //小計(subtotal)の配列をすべて足す
+    let sum = subtotal.reduce(function(sumsum, element){
+      return sumsum + element;
+    }, 0);
 
     let opt ={
       title:'JM承認 - 交通費',
@@ -502,6 +586,8 @@ router.post('/',async function(req,response,next){
       hiddenmonth:nn,
       job_no:job_no,
       emp_no:emp_no,
+      emp_name:emp_name,
+      sum:sum,
     }
 
       //レンダーする

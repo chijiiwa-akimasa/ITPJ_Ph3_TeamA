@@ -7,7 +7,7 @@
   </ul>
 </nav>
 
-<form action="/jmkeihi" method="post"> <!-- 年月 -->
+<form action="/jmkehi" method="post"> <!-- 年月 -->
   <input type="hidden" name="year" value="<%- year %>">
   <input type="hidden" name="month" value="<%- nowmonth %>">
   <input type="hidden" name="status" value="1=1">
@@ -19,7 +19,7 @@
   </div>
 </form>
 
-<form action="/jmkeihi" method="post">
+<form action="/jmkehi" method="post">
   <div class="search_box">
     <input type="hidden" name="year" value="<%- year %>">
     <input type="hidden" name="month" value="<%- nowmonth %>">
@@ -45,62 +45,62 @@
 
 <table>
     <tr>
-      <th width="10%">ステータス</th>
-      <th width="11%">勘定科目</th>
-      <th width="11%">摘要</th>
-      <th width="6%">立替</th>
-      <th width="6%">Job.C</th>
-      <th width="5%">利用日</th>
-      <th width="7%">金額</th>
-      <th width="11%">支払先</th> 
-      <th width="6%">Ref.No</th>
-      <th width="4%">承認</th>
-      <th width="4%">却下</th>
-      <th width="16%">コメント</th>
+      <th width="100px">ステータス</th>
+      <th width="35px">勘定科目</th>
+      <th width="35px">摘要</th>
+      <th width="55px">立替</th>
+      <th width="50px">JobC</th>
+      <th width="60x">RefNo</th>
+      <th width="35px">月</th>
+      <th width="35px">日</th>
+      <th width="65px">金額</th>
+      <th width="65px">支払先</th>
+      <th width="40px">承認</th>
+      <th width="40px">却下</th>
+      <th width="185px">コメント</th>
     </tr>
-  </thead>
 </table>
 
+<!-- サブヘッダー -->
+<!-- まだ -->
+
+<!-- データテーブル -->
 <form method="POST" action="/jmkehi" name='set'>
-
-  <p class="employeeT"><%= emp_no %></p>
-  <p class="jobT"><%= job_no %></p>
-  <p class="sumT">合計金額（DBより）</p>
-
   <table>
     <% for(let i in status) { %> 
-      <tr>
-        <td width="10%" class="first" rowspan="2"><%=status[i] %></td>
-        <td width="11%"><%=code_name[i] %></td>
-        <td width="11%"><%=summary[i] %></td>
-        <td width="6%"><input id="chkbox0" type="checkbox"/></td>
-        <td width="6%"><input id="chkbox0" type="checkbox"/></td>
-        <td width="5%" class="greyout"><%=day[i] %></td>
-        <td width="7%" class="greyout"><%= amount[i] %></td>
-        <td width="11%" class="greyout"><%= payee[i] %></td>
-        <td width="6%" class="greyout"><%=ref_no[i] %></td>
-        <td width="4%" class="first" rowspan="2">
-          <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
-        </td>
-        <td width="4%" class="first" rowspan="2">
-          <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
-        </td>
-        <td width="16%" class="first" rowspan="2">
-          <input type="text" class='textsize'/>
-        </td>
-      </tr>
-      <tr>
-        <td class="comment" colspan="8"><%=remarks %></td>
-      </tr>
-    <% } %>   
+    <tr>
+      <td width="100px" class="first" rowspan="2"><%=status[i] %></td>
+      <td width="50px"><%=summary[i] %></td>
+      <td width="50px"><%=code_name[i] %></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="60px" bgcolor="lightgrey"><%=ref_no[i] %></td>
+      <td width="35px"><%=month[i] %></td>
+      <td width="35px"><%=day[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= amount[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= payee[i] %></td>
+      <td width="40px" class="first" rowspan="2">
+        <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
+      </td>
+      <td width="40px" class="first" rowspan="2">
+        <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
+      </td>
+      <td width="185px" class="first" rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td class="comment" colspan="20"><%=remarks %></td>
+    </tr>
+    <% } %>
   </table>
-<!-- ここから上がセット -->
 
-  <div class="box">
-    <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
-    <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set,0)">
-    <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
-  </div>
+<div class="box">
+  <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
+  <input type="button" id="b3" name='b3' value="全解除" class="allcheck" onClick="allcheckout(set)">
+  <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
+</div>
+
 </form>
 
-<%- include("partials/footer2") %>
+<%- include("partials/footer") %>
