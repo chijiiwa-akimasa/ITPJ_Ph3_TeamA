@@ -78,7 +78,6 @@
         <% for(var j=0;j<rireki.length;j++){ %>
           <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
             <p><%- rireki[j].job_no %></p>
-            <p>合計金額<%- sum[j] %>円</p>
             <% jn=rireki[j].job_no; %> 
             <% for(var k=0;k<rireki.length;k++){ %>
               <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>

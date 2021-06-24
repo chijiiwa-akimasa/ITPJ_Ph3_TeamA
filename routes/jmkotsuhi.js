@@ -76,18 +76,18 @@ router.get('/', async function(req, res, next) {
                 radioname[i]='radioname' +[i];
             }
 
-            for(var i in result.rows){
-              amount[i]=result.rows[i].amount;
-              count[i]=result.rows[i].count;
-              subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            }
+            // for(var i in result.rows){
+            //   amount[i]=result.rows[i].amount;
+            //   count[i]=result.rows[i].count;
+            //   subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            // }
 
-            //小計(subtotal)の配列をすべて足す
-            sum[i] = subtotal.reduce(function(sumsum, element){
-              return sumsum + element;
-            }, 0);
+            // 小計(subtotal)の配列をすべて足す
+            // sum[i] = subtotal.reduce(function(sumsum, element){
+            //   return sumsum + element;
+            // }, 0);
 
-            console.log(sum);
+            // console.log(sum);
 
             client.end();
 
@@ -97,8 +97,8 @@ router.get('/', async function(req, res, next) {
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                subtotal:subtotal,
-                sum:sum,
+                // subtotal:subtotal,
+                // sum:sum,
                 radioname:radioname,
             }
 
