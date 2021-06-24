@@ -48,6 +48,8 @@ router.get('/', async function(req, res, next) {
     let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
     let sql1 = "SELECT * FROM Employee";
 
+    console.log(sql)
+
     //これは必ず必要
     await client.connect();
 
@@ -73,8 +75,13 @@ router.get('/', async function(req, res, next) {
             for(let i = 0; i <= result.rows; i++){
 
                 rireki.push(result.rows[i]);
-                radioname[i]='radioname' +[i];
             }
+
+            for(let i in rireki){
+                radioname[i]='"'+ 'radioname' +[i]+'"';
+            }
+            
+            console.log(radioname)
 
             // for(var i in result.rows){
             //   amount[i]=result.rows[i].amount;
@@ -130,6 +137,8 @@ router.post('/',async function(req,res,next){
 
       let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
       let sql1 = "SELECT * FROM Employee";
+
+      console.log(sql)
 
         //これは必ず必要
         await client.connect();
@@ -235,7 +244,7 @@ router.post('/',async function(req,res,next){
               for(let i = 0; i <= result.rows; i++){
 
                 rireki.push(result.rows[i]);
-                radioname[i]='radioname' +[i];
+                radioname[i]='"'+ 'radioname' +[i]+'"';
             }
 
             // for(var i in result.rows){
