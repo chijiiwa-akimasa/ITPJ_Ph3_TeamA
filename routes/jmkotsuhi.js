@@ -72,11 +72,7 @@ router.get('/', async function(req, res, next) {
 
             for(let i = 0; i <= result.rows; i++){
 
-                rireki.push(result.rows[i])
-
-                subtotal[i]=result.rows[i].amount*result.rows[i].count;
-                subtotal.push(result.rows[i].amount*result.rows[i].count);
-
+                rireki.push(result.rows[i]);
                 radioname[i]='radioname' +[i];
             }
 
