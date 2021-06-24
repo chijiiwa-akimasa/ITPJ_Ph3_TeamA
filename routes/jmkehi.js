@@ -1,15 +1,56 @@
-const { text } = require('express');
-const { response } = require('express');
 var express = require('express');
-var nodemailer = require('nodemailer');
-const { options } = require('.');
 var router = express.Router();
 var {Client}=require('pg');
+const { connect } = require('./login');
 
-require('dotenv').config();
-const user=process.env.USER;
-const dbpassword=process.env.PASSWORD;
+//定義
+var emp_no=[];
+var sheet_year=[];
+var sheet_month=[];
+var branch_no=[];
+var year=[];
+var month=[];
+var day=[];
+var code_name=[];
+var payee=[];
+var summary=[];
+var amount=[];
+var job_no=[];
+var job_manager=[];
+var claim_flag=[];
+var charge_flag=[];
+var ref_no=[];
+var status=[];
+var remarks=[];
+var new0=[];
+var new_date=[];
+var renew=[];
+var renew_date=[];
+var emp_name=[];
 
+var emp_no2=[];
+var sheet_year2=[];
+var sheet_month2=[];
+var branch_no2=[];
+var year2=[];
+var month2=[];
+var day2=[];
+var code_name2=[];
+var payee2=[];
+var summary2=[];
+var amount2=[];
+var job_no3=[];
+var job_manager2=[];
+var claim_flag2=[];
+var charge_flag2=[];
+var ref_no2=[];
+var status3=[];
+var remarks2=[];
+var new02=[];
+var new_date2=[];
+var renew2=[];
+var renew_date2=[];
+var emp_name3=[];
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
@@ -26,26 +67,18 @@ if (mm === 1 && dd<21) {
     yyyy -=1
 }
 
-/* ページが読み込まれたとき */
-router.get('/',async function(req, res, next) { 
-
+  //経費承認画面起動時
+ router.get('/',async function(req, res, next) { 
   var client=new Client({
     user:'postgres',
     host:'localhost',
     database:'itpjph3',
     password:dbpassword,
     port:5432,
-});
+  });
 
-  nn = nn-1+1;
-  mm = mm-1+1;
-
-  //「承認期間中のもの」かつ「社員IDが自分のもの」かつ「JM承認中のステータス」の条件でデータを指定して、ejsに渡す
-  // let sql = "SELECT * FROM tedetail WHERE job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-  let sql = "SELECT * FROM exdetail WHERE job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
-  console.log(sql);
-
-  //これは必ず必要
+  var job_manager0=req.body.job_manager0;
+ 
   await client.connect();
 
   client.query(sql,(err,result)=>{
@@ -103,7 +136,12 @@ router.get('/',async function(req, res, next) {
       nowmonth:nn,
       month:month,
       day:day,
+      code_name:code_name,
+      payee:payee,
+      summary:summary,
       amount:amount,
+      job_no:job_no,
+      job_manager:job_manager,
       claim_flag:claim_flag,
       charge_flag:charge_flag,
       ref_no:ref_no,
@@ -143,6 +181,7 @@ router.post('/',async function(req,response,next){
       password:dbpassword,
       port:5432,
     });
+  });  
 
     // client.connect();   //これは必ず必要
 
@@ -389,6 +428,7 @@ router.post('/',async function(req,response,next){
       password:dbpassword,
       port:5432,
     });
+  });
 
     nn = nn-1+1;
     mm = mm-1+1;
@@ -478,4 +518,4 @@ router.post('/',async function(req,response,next){
  } //if(req.body.confirm)を締める
 }) //router.post締める
 
-module.exports = router;
+  module.exports = router;

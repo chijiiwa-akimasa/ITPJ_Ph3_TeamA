@@ -1,3 +1,5 @@
+
+
 <%- include('partials/header2') %>
 
 <nav class="navbar">
@@ -24,7 +26,7 @@
     <input type="hidden" name="year" value="<%- year %>">
     <input type="hidden" name="month" value="<%- nowmonth %>">
     <div class="d">表示条件：ステータス</div>
-    <select name="status" id="status" class="select">
+    <select name="status2" id="status2" class="select">
       <option value="1=1">全て</option>
       <option value="status='00'">未申請</option>
       <option value="status='11'">JobM申請中</option>
@@ -40,7 +42,21 @@
         <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
         <% } %> 
     </select>
-    <input type="submit" name="display" value="表示" class="search">  
+    <div class='form-group form-inline'>
+      <label>ジョブ</label>
+      <select name="job_no2" id="job_no2" class="select">
+        <option value="1=1">全て</option>
+        <% for(var i=0;i<job.length;i++){ %> 
+        <option value="job_no='<%- job[i].job_id %>'"><%- job[i].job_name %></option>
+        <% } %> 
+      </select>
+    </div>
+    <div class='form-group form-inline'>
+      <label>期間</label>
+      <input id="yyy1" name="yyy1" size="4" required placeholder="yyyy"><input id="m1" name="m1" size="2" required placeholder="m"><input id="d1" name="d1" size="2" required placeholder="dd">~
+      <input id="yyy2" name="yyy2" size="4" required placeholder="yyyy"><input id="m2" name="m2" size="2" required placeholder="m"><input id="d2" name="d2" size="2" required placeholder="dd">
+    </div> 
+  <input type="submit" name="display" value="表示" class="search">  
   </div>
 </form>
 
@@ -78,6 +94,7 @@
         <% for(var j=0;j<rireki.length;j++){ %>
           <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
             <p><%- rireki[j].job_no %></p>
+            <p>合計金額<%- sum[j] %>円</p>
             <% jn=rireki[j].job_no; %> 
             <% for(var k=0;k<rireki.length;k++){ %>
               <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
@@ -110,6 +127,8 @@
           <td width="65px"><%- rireki[k].amount %></td>
           <td width="65px"><%- rireki[k].amount*rireki[k].count %></td>
           <td width="60px"><%- rireki[k].ref_no %></td>
+          <input type='hidden' name=<%- rireki[k].branch_no %>>
+          <input type="hidden" class='form-control' value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'" name="approve" />
           <td width="40px" class="first" rowspan="2">
             <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- radioname[k] %> />
           </td>
