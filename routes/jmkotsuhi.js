@@ -76,18 +76,16 @@ router.get('/', async function(req, res, next) {
                 radioname[i]='radioname' +[i];
             }
 
-            // for(var i in result.rows){
-            //   amount[i]=result.rows[i].amount;
-            //   count[i]=result.rows[i].count;
-            //   subtotal[i]=result.rows[i].amount*result.rows[i].count;
-            // }
+            for(var i in result.rows){
+              amount[i]=result.rows[i].amount;
+              count[i]=result.rows[i].count;
+              subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            }
 
             // 小計(subtotal)の配列をすべて足す
             // sum[i] = subtotal.reduce(function(sumsum, element){
             //   return sumsum + element;
             // }, 0);
-
-            // console.log(sum);
 
             client.end();
 
@@ -97,8 +95,8 @@ router.get('/', async function(req, res, next) {
                 rireki:rireki,
                 year:yyyy,
                 nowmonth:nn,
-                // subtotal:subtotal,
-                // sum:sum,
+                subtotal:subtotal,
+                sum:'',
                 radioname:radioname,
             }
 
@@ -156,40 +154,34 @@ router.post('/',async function(req,res,next){
               var radioname = [];
   
               for(let i = 0; i <= result.rows; i++){
-  
-                  rireki.push(result.rows[i])
-  
-                  subtotal[i]=result.rows[i].amount*result.rows[i].count;
-                  subtotal.push(result.rows[i].amount*result.rows[i].count);
-  
-                  radioname[i]='radioname' +[i];
-              }
-  
-              for(var i in result.rows){
-                amount[i]=result.rows[i].amount;
-                count[i]=result.rows[i].count;
-                subtotal[i]=result.rows[i].amount*result.rows[i].count;
-              }
-  
-              //小計(subtotal)の配列をすべて足す
-              sum[i] = subtotal.reduce(function(sumsum, element){
-                return sumsum + element;
-              }, 0);
-  
-              console.log(subtotal);
-  
-              client.end();
-  
-              let opt={
-                  title:'JM承認 - 交通費',
-                  shain:shain,
-                  rireki:rireki,
-                  year:yyyy,
-                  nowmonth:nn,
-                  subtotal:subtotal,
-                  sum:sum,
-                  radioname:radioname,
-              }
+
+                rireki.push(result.rows[i]);
+                radioname[i]='radioname' +[i];
+            }
+
+            for(var i in result.rows){
+            amount[i]=result.rows[i].amount;
+            count[i]=result.rows[i].count;
+            subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            }
+
+            // 小計(subtotal)の配列をすべて足す
+            // sum[i] = subtotal.reduce(function(sumsum, element){
+            //   return sumsum + element;
+            // }, 0);
+
+            client.end();
+
+            let opt={
+                title:'JM承認 - 交通費',
+                shain:shain,
+                rireki:rireki,
+                year:yyyy,
+                nowmonth:nn,
+                subtotal:subtotal,
+                sum:'',
+                radioname:radioname,
+            }
                 res.render('jmkotsuhi', opt);  
 
             });//2つ目のclient.query締める
@@ -241,40 +233,34 @@ router.post('/',async function(req,res,next){
               var radioname = [];
   
               for(let i = 0; i <= result.rows; i++){
-  
-                  rireki.push(result.rows[i])
-  
-                  subtotal[i]=result.rows[i].amount*result.rows[i].count;
-                  subtotal.push(result.rows[i].amount*result.rows[i].count);
-  
-                  radioname[i]='radioname' +[i];
-              }
-  
-              for(var i in result.rows){
-                amount[i]=result.rows[i].amount;
-                count[i]=result.rows[i].count;
-                subtotal[i]=result.rows[i].amount*result.rows[i].count;
-              }
-  
-              //小計(subtotal)の配列をすべて足す
-              sum[i] = subtotal.reduce(function(sumsum, element){
-                return sumsum + element;
-              }, 0);
-  
-              console.log(sum);
-  
-              client.end();
-  
-              let opt={
-                  title:'JM承認 - 交通費',
-                  shain:shain,
-                  rireki:rireki,
-                  year:yyyy,
-                  nowmonth:nn,
-                  subtotal:subtotal,
-                  sum:sum,
-                  radioname:radioname,
-              }
+
+                rireki.push(result.rows[i]);
+                radioname[i]='radioname' +[i];
+            }
+
+            for(var i in result.rows){
+              amount[i]=result.rows[i].amount;
+              count[i]=result.rows[i].count;
+              subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            }
+
+            // 小計(subtotal)の配列をすべて足す
+            // sum[i] = subtotal.reduce(function(sumsum, element){
+            //   return sumsum + element;
+            // }, 0);
+
+            client.end();
+
+            let opt={
+                title:'JM承認 - 交通費',
+                shain:shain,
+                rireki:rireki,
+                year:yyyy,
+                nowmonth:nn,
+                subtotal:subtotal,
+                sum:'',
+                radioname:radioname,
+            }
                 res.render('jmkotsuhi', opt);  
 
             });//2つ目のclient.query締める
@@ -376,40 +362,34 @@ router.post('/',async function(req,res,next){
               var radioname = [];
   
               for(let i = 0; i <= result.rows; i++){
-  
-                  rireki.push(result.rows[i])
-  
-                  subtotal[i]=result.rows[i].amount*result.rows[i].count;
-                  subtotal.push(result.rows[i].amount*result.rows[i].count);
-  
-                  radioname[i]='radioname' +[i];
-              }
-  
-              for(var i in result.rows){
-                amount[i]=result.rows[i].amount;
-                count[i]=result.rows[i].count;
-                subtotal[i]=result.rows[i].amount*result.rows[i].count;
-              }
-  
-              //小計(subtotal)の配列をすべて足す
-              sum[i] = subtotal.reduce(function(sumsum, element){
-                return sumsum + element;
-              }, 0);
-  
-              console.log(subtotal);
-  
-              client.end();
-  
-              let opt={
-                  title:'JM承認 - 交通費',
-                  shain:shain,
-                  rireki:rireki,
-                  year:yyyy,
-                  nowmonth:nn,
-                  subtotal:subtotal,
-                  sum:sum,
-                  radioname:radioname,
-              }
+
+                rireki.push(result.rows[i]);
+                radioname[i]='radioname' +[i];
+            }
+
+            for(var i in result.rows){
+              amount[i]=result.rows[i].amount;
+              count[i]=result.rows[i].count;
+              subtotal[i]=result.rows[i].amount*result.rows[i].count;
+            }
+
+            // 小計(subtotal)の配列をすべて足す
+            // sum[i] = subtotal.reduce(function(sumsum, element){
+            //   return sumsum + element;
+            // }, 0);
+
+            client.end();
+
+            let opt={
+                title:'JM承認 - 交通費',
+                shain:shain,
+                rireki:rireki,
+                year:yyyy,
+                nowmonth:nn,
+                subtotal:subtotal,
+                sum:'',
+                radioname:radioname,
+            }
                 res.render('jmkotsuhi', opt);  
 
             });//2つ目のclient.query締める
