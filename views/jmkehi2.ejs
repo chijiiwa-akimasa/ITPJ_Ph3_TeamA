@@ -1,0 +1,106 @@
+<%- include("partials/header2") %>
+
+<nav class="navbar">
+  <ul class="top">
+    <h3>経費</h3>
+    <li><a href="/jmkotsuhi">交通費</a></li>
+  </ul>
+</nav>
+
+<form action="/jmkehi" method="post"> <!-- 年月 -->
+  <input type="hidden" name="year" value="<%- year %>">
+  <input type="hidden" name="month" value="<%- nowmonth %>">
+  <input type="hidden" name="status" value="1=1">
+  <input type="hidden" name="employee" value="1=1">
+  <div class="date_box">
+    <button class="last" name="previousmonth" value="-1">◀</button>
+    <b><%- year %>年 <%- nowmonth %>月分</b>
+    <button class="next" name="nextmonth" value="+1">▶</button>
+  </div>
+</form>
+
+<form action="/jmkehi" method="post">
+  <div class="search_box">
+    <input type="hidden" name="year" value="<%- year %>">
+    <input type="hidden" name="month" value="<%- nowmonth %>">
+    <div class="d">表示条件：ステータス</div>
+    <select name="status" id="status" class="select">
+      <option value="1=1">全て</option>
+      <option value="status='00'">未申請</option>
+      <option value="status='11'">JobM申請中</option>
+      <option value="status='19'">JobM却下</option>
+      <option value="status='21'">経理申請中</option>
+      <option value="status='29'">承認</option>
+      <option value="status='88'">却下</option>
+    </select>
+    <div class="d">社員</div>
+    <select name="employee" id="employee" class="select">
+      <option value="1=1">全て</option>
+    </select>
+    <input type="submit" name="display" value="表示" class="search">  
+  </div>
+</form>
+
+<!-- テーブルタイトル -->
+
+<table>
+    <tr>
+      <th width="100px">ステータス</th>
+      <th width="35px">勘定科目</th>
+      <th width="35px">摘要</th>
+      <th width="55px">立替</th>
+      <th width="50px">JobC</th>
+      <th width="60x">RefNo</th>
+      <th width="35px">月</th>
+      <th width="35px">日</th>
+      <th width="65px">金額</th>
+      <th width="65px">支払先</th>
+      <th width="40px">承認</th>
+      <th width="40px">却下</th>
+      <th width="185px">コメント</th>
+    </tr>
+</table>
+
+<!-- サブヘッダー -->
+<!-- まだ -->
+
+<!-- データテーブル -->
+<form method="POST" action="/jmkehi" name='set'>
+  <table>
+    <% for(let i in status) { %> 
+    <tr>
+      <td width="100px" class="first" rowspan="2"><%=status[i] %></td>
+      <td width="50px"><%=summary[i] %></td>
+      <td width="50px"><%=code_name[i] %></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+      <td width="60px" bgcolor="lightgrey"><%=ref_no[i] %></td>
+      <td width="35px"><%=month[i] %></td>
+      <td width="35px"><%=day[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= amount[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= payee[i] %></td>
+      <td width="40px" class="first" rowspan="2">
+        <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
+      </td>
+      <td width="40px" class="first" rowspan="2">
+        <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
+      </td>
+      <td width="185px" class="first" rowspan="2">
+        <input type="text" class='form-control'/>
+      </td>
+    </tr>
+    <tr>
+      <td class="comment" colspan="20"><%=remarks %></td>
+    </tr>
+    <% } %>
+  </table>
+
+<div class="box">
+  <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
+  <input type="button" id="b3" name='b3' value="全解除" class="allcheck" onClick="allcheckout(set)">
+  <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
+</div>
+
+</form>
+
+<%- include("partials/footer") %>

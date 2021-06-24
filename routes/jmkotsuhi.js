@@ -66,22 +66,19 @@ router.get('/', async function(req, res, next) {
         client.query(sql,(err,result)=>{
 
             var rireki = result.rows;
-            var subtotal =[];
-            var amount = [];
-            var count =[];
-            var sum = [];
-            var radioname = [];
-
             for(let i = 0; i <= result.rows; i++){
-
                 rireki.push(result.rows[i]);
             }
 
-            for(let i in rireki){
-                radioname[i]='"'+ 'radioname' +[i]+'"';
+            var radioname = [];
+            for(let i in result.rows){
+                radioname.push('"'+ 'radioname' +[i]+'"');
             }
-            
-            console.log(radioname)
+
+
+            // for(let i in rireki){
+            //     radioname[i]='"'+ 'radioname' +[i]+'"';
+            // }
 
             // for(var i in result.rows){
             //   amount[i]=result.rows[i].amount;
@@ -165,7 +162,10 @@ router.post('/',async function(req,res,next){
               for(let i = 0; i <= result.rows; i++){
 
                 rireki.push(result.rows[i]);
-                radioname[i]='radioname' +[i];
+            }
+
+            for(let i in rireki){
+                radioname[i]='"'+ 'radioname' +[i]+'"';
             }
 
             // for(var i in result.rows){
@@ -244,6 +244,9 @@ router.post('/',async function(req,res,next){
               for(let i = 0; i <= result.rows; i++){
 
                 rireki.push(result.rows[i]);
+            }
+
+            for(let i in rireki){
                 radioname[i]='"'+ 'radioname' +[i]+'"';
             }
 
@@ -373,7 +376,10 @@ router.post('/',async function(req,res,next){
               for(let i = 0; i <= result.rows; i++){
 
                 rireki.push(result.rows[i]);
-                radioname[i]='radioname' +[i];
+            }
+
+            for(let i in rireki){
+                radioname[i]='"'+ 'radioname' +[i]+'"';
             }
 
             // for(var i in result.rows){

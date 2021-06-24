@@ -9,7 +9,7 @@
   </ul>
 </nav>
 
-<form action="/jmkotsuhi3" method="post"> <!-- 年月 -->
+<form action="/jmkotsuhi4" method="post"> <!-- 年月 -->
   <input type="hidden" name="year" value="<%- year %>">
   <input type="hidden" name="month" value="<%- nowmonth %>">
   <input type="hidden" name="status" value="1=1">
@@ -21,7 +21,7 @@
   </div>
 </form>
 
-<form action="/jmkotsuhi3" method="post">
+<form action="/jmkotsuhi4" method="post">
   <div class="search_box">
     <input type="hidden" name="year" value="<%- year %>">
     <input type="hidden" name="month" value="<%- nowmonth %>">
@@ -82,7 +82,7 @@
   </tr>
 </table>
 
-<form method="POST" action="/jmkotsuhi3" name='set'>
+<form method="POST" action="/jmkotsuhi4" name='set'>
     <!-- サブヘッダー -->
     <% var jn; %> 
     <% if(rireki[0]==null){ %>
@@ -94,7 +94,6 @@
         <% for(var j=0;j<rireki.length;j++){ %>
           <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
             <p><%- rireki[j].job_no %></p>
-            <p>合計金額<%- sum[j] %>円</p>
             <% jn=rireki[j].job_no; %> 
             <% for(var k=0;k<rireki.length;k++){ %>
               <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
@@ -155,5 +154,7 @@
         <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set)">
         <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
       </div>
+
+    </form>
       
     <%- include('partials/footer2') %>
