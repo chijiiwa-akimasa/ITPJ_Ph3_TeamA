@@ -34,6 +34,7 @@
     <h1><%= title %></h1>
     <h2>経費データ</h2>
     <h3><%= h3 %></h3>
+    <td id="job_manager0", name="job_manager0">111</h3>　ログイン者社員番号が入る
     <div class="all">
       <div class="form-group btn">
         <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
@@ -43,25 +44,37 @@
         <div class='list'>
           <div class='form-group form-inline'>
             <label>ステータス</label>
-            <select id='status' name='status' class='form-control'>
-              <option>全て</option>
-              <option>未申請</option>
-              <option>JM申請中</option>
-              <option>経理申請中</option>
-              <option>承認</option>
-              <option>却下</option>
+            <select id="status2" name="status2" class='form-control' >
+              <option value="">全て</option>
+              <option value="00">未申請</option>
+              <option selected value="11">JM申請中</option>
+              <option value="19">JM却下</option>
+              <option value="21">経理申請中</option>
+              <option value="29">承認</option>
+              <option value="88">却下</option>
+            </select>
+          </div>
+
+          <div class='form-group form-inline'>
+            <label>社員</label>
+            <select id="emp_name2" name="emp_name2" class='form-control'>
+              <option selected >全て</option>
+              <option>山田花子</option>
+              <option>山田太郎</option>
+              <option>田中一郎</option> 
             </select>
           </div>
           <div class='form-group form-inline'>
-            <label>社員</label>
-            <select id='employee' name='employee' class='form-control'>
-              <option>全て</option>
-              <option>aaa</option>
-              <option>bbb</option>
-              <option>ccc</option>
-            </select>
+            <label>ジョブコード</label>
+            <input id="job_no2" type="text" name="job_no2" size="10">
           </div>
-          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown'>
+
+          <div class='form-group form-inline'>
+            <label>期間</label>
+            <input id="yyy1" name="yyy1" size="4"><input id="m1" name="m1" size="2"><input id="d1" name="d1" size="2">~
+            <input id="yyy2" name="yyy2" size="4"><input id="m2" name="m2" size="2"><input id="d2" name="d2" size="2">
+          </div>
+          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-danger" name='narrowDown' >
         </div>
       </form>
   </div>
