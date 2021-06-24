@@ -6,6 +6,10 @@ const { options } = require('.');
 var router = express.Router();
 var {Client}=require('pg');
 
+require('dotenv').config();
+const user=process.env.USER;
+const dbpassword=process.env.PASSWORD;
+
 
 //日付け取得　※交通費画面起動の際、〇/21～〇/20分のみ表示するために定義
 var date = new Date();
@@ -29,7 +33,7 @@ router.get('/',async function(req, res, next) {
     user:'postgres',
     host:'localhost',
     database:'itpjph3',
-    password:'Psklt@363',
+    password:dbpassword,
     port:5432,
 });
 
@@ -136,7 +140,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 
@@ -238,7 +242,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 
@@ -382,7 +386,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 

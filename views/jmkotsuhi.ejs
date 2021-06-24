@@ -36,6 +36,9 @@
     <div class="d">社員</div>
     <select name="employee" id="employee" class="select">
       <option value="1=1">全て</option>
+      <% for(var i=0;i<shain.length;i++){ %> 
+        <option value="emp_no='<%- emp_no1[i] %>'"><%- emp_name1[i] %></option>
+        <% } %> 
     </select>
     <input type="submit" name="display" value="表示" class="search">  
   </div>
@@ -63,42 +66,71 @@
   </tr>
 </table>
 
+<form method="POST" action="/jmkotsuhi" name='set'>
 <!-- サブヘッダー -->
 <!-- まだ -->
+<% var jn; %> 
+<% if(rireki[0]==null){ %>
+  <p>該当データはありません</p>
+<% }else{ %> 
+  <% for(var i=0;i<shain.length;i++){ %> 
+    <p><%- emp_name1[i] %></p>
+    <% jn=0; %> 
+    <% for(var j=0;j<rireki.length;j++){ %>
+      <% if(emp_no[j]===emp_no1[i]&&job_no[j]!==jn){ %>
+        <p><%= job_no[j] %></p>
+        <% jn=job_no[j]; %> 
+        <% for(var k=0;k<rireki.length;k++){ %>
+          <% if(emp_no1[i]===emp_no[k]&&job_no[k]===job_no[j]){ %>
 
 <!-- データテーブル -->
-<form method="POST" action="/jmkotsuhi" name='set'>
   <table>
-    <% for(let i in status) { %> 
     <tr>
-      <td width="100px" class="first" rowspan="2"><%=status[i] %></td>
-      <td width="35px"><%=month[i] %></td>
-      <td width="35px"><%=day[i] %></td>
-      <td width="100px"><%=trans_from[i] %></td>
-      <td width="100px"><%=trans_waypoint[i] %></td>
-      <td width="100px"><%=trans_to[i] %></td>
-      <td width="80px"><%=trans_type[i] %></td>
-      <td width="50px"><%=count[i] %></td>
+      <% if(status[k]=="00"){ %>
+      <td width="100px" class="first" rowspan="2">未申請</td>
+      <% }else if(status[k]=="11"){ %> 
+        <td width="100px" class="first" rowspan="2">JM申請中</td>
+      <% }else if(status[k]=="19"){ %> 
+        <td width="100px" class="first" rowspan="2">JM却下</td>
+      <% }else if(status[k]=="21"){ %>
+        <td width="100px" class="first" rowspan="2">経理申請中</td>
+      <% }else if(status[k]=="29"){ %>
+        <td width="100px" class="first" rowspan="2">経理却下</td>
+      <% }else if(status[k]=="88"){ %>  
+        <td width="100px" class="first" rowspan="2">承認</td>
+      <% } %> 
+      <td width="35px"><%=month[k] %></td>
+      <td width="35px"><%=day[k] %></td>
+      <td width="100px"><%=trans_from[k] %></td>
+      <td width="100px"><%=trans_waypoint[k] %></td>
+      <td width="100px"><%=trans_to[k] %></td>
+      <td width="80px"><%=trans_type[k] %></td>
+      <td width="50px"><%=count[k] %></td>
       <td width="50px"><input id="chkbox0" type="checkbox"/></td>
       <td width="50px"><input id="chkbox0" type="checkbox"/></td>
-      <td width="65px" bgcolor="lightgrey"><%= amount[i] %></td>
-      <td width="65px" bgcolor="lightgrey"><%= subtotal[i] %></td>
-      <td width="60px" bgcolor="lightgrey"><%=ref_no[i] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= amount[k] %></td>
+      <td width="65px" bgcolor="lightgrey"><%= subtotal[k] %></td>
+      <td width="60px" bgcolor="lightgrey"><%=ref_no[k] %></td>
       <td width="40px" class="first" rowspan="2">
-        <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
+        <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[k] %> />
       </td>
       <td width="40px" class="first" rowspan="2">
-        <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
+        <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[k] %> />
       </td>
       <td width="185px" class="first" rowspan="2">
         <input type="text" class='form-control'/>
       </td>
     </tr>
     <tr>
-      <td class="comment" colspan="20"><%=remarks %></td>
+      <td class="comment" colspan="20"><%=remarks[k] %></td>
     </tr>
-    <% } %>
   </table>
+  <% } %>  
+  <% } %> 
+  <% } %>  
+<% } %>  
+<% } %> 
+<% } %> 
 
 <div class="box">
   <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
