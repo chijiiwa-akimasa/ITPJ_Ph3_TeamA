@@ -1,15 +1,13 @@
-
-
 <%- include('partials/header2') %>
 
 <nav class="navbar">
   <ul class="top">
-    <li><a href="/jmkehi4">経費</a></li>
-    <h3>交通費</h3>
+    <h3>経費</h3>
+    <li><a href="/jmkotsuhi4">交通費</a></li>
   </ul>
 </nav>
 
-<form action="/jmkotsuhi4" method="post"> <!-- 年月 -->
+<form action="/jmkehi4" method="post"> <!-- 年月 -->
   <input type="hidden" name="year" value="<%- year %>">
   <input type="hidden" name="month" value="<%- nowmonth %>">
   <input type="hidden" name="status" value="1=1">
@@ -21,7 +19,7 @@
   </div>
 </form>
 
-<form action="/jmkotsuhi4" method="post">
+<form action="/jmkehi4" method="post">
   <div class="search_box">
     <input type="hidden" name="year" value="<%- year %>">
     <input type="hidden" name="month" value="<%- nowmonth %>">
@@ -64,17 +62,14 @@
 <table>
   <tr>
     <th width="8%">ステータス</th>
-    <th width="3%">月</th>
-    <th width="3%">日</th>
-    <th width="7%">From</th>
-    <th width="7%">Via</th>
-    <th width="7%">To</th>
-    <th width="7%">交通手段</th>
-    <th width="4%">回数</th>
+    <th width="11%">勘定科目</th>
+    <th width="11%">摘要</th>
     <th width="5%">立替</th>
     <th width="5%">JobC</th>
-    <th width="5%">単価</th>
-    <th width="5%">小計</th>
+    <th width="3%">月</th>
+    <th width="3%">日</th>
+    <th width="7%">金額</th>
+    <th width="11%">支払先</th>
     <th width="5%">RefNo</th>
     <th width="4%">承認</th>
     <th width="4%">却下</th>
@@ -82,7 +77,7 @@
   </tr>
 </table>
 
-<form method="POST" action="/jmkotsuhi4" name='set'>
+<form method="POST" action="/jmkehi4" name='set'>
     <!-- サブヘッダー -->
     <% var jn; %> 
     <% if(rireki[0]==null){ %>
@@ -101,39 +96,38 @@
     <!-- データテーブル -->
       <table>
         <tr>
-          <% if(rireki[k].status=="00"){ %>
-          <td width="8%" class="first" rowspan="2">未申請</td>
-          <% }else if(rireki[k].status=="11"){ %> 
-            <td width="8%" class="first" rowspan="2">JM申請中</td>
-          <% }else if(rireki[k].status=="19"){ %> 
-            <td width="8%" class="first" rowspan="2">JM却下</td>
-          <% }else if(rireki[k].status=="21"){ %>
-            <td width="8%" class="first" rowspan="2">経理申請中</td>
-          <% }else if(rireki[k].status=="29"){ %>
-            <td width="8%" class="first" rowspan="2">経理却下</td>
-          <% }else if(rireki[k].status=="88"){ %>  
-            <td width="8%" class="first" rowspan="2">承認</td>
-          <% } %> 
-          <td width="3%"><%-rireki[k].month %></td>
-          <td width="3%"><%-rireki[k].day %></td>
-          <td width="7%"><%-rireki[k].trans_from %></td>
-          <td width="7%"><%-rireki[k].trans_waypoint %></td>
-          <td width="7%"><%-rireki[k].trans_to %></td>
-          <% if(rireki[k].trans_type=="1"){ %>
-          <td width="7%">電車</td>
-          <% }else if(rireki[k].trans_type=="2"){ %> 
-            <td width="7%">タクシー</td>
-          <% }else if(rireki[k].trans_type=="3"){ %> 
-            <td width="7%">バス</td>
-          <% }else if(rireki[k].trans_type=="4"){ %>
-            <td width="7%">その他</td>
-          <% } %> 
-          <td width="4%"><%-rireki[k].count %></td>
-          <td width="5%"><input id="chkbox0" type="checkbox"/></td>
-          <td width="5%"><input id="chkbox0" type="checkbox"/></td>
-          <td width="5%" class="greyout"><%- rireki[k].amount %></td>
-          <td width="5%" class="greyout"><%- rireki[k].amount*rireki[k].count %></td>
-          <td width="5%" class="greyout"><%- rireki[k].ref_no %></td>
+            <% if(rireki[k].status=="00"){ %>
+            <td width="8%" class="first" rowspan="2">未申請</td>
+            <% }else if(rireki[k].status=="11"){ %> 
+                <td width="8%" class="first" rowspan="2">JM申請中</td>
+            <% }else if(rireki[k].status=="19"){ %> 
+                <td width="8%" class="first" rowspan="2">JM却下</td>
+            <% }else if(rireki[k].status=="21"){ %>
+                <td width="8%" class="first" rowspan="2">経理申請中</td>
+            <% }else if(rireki[k].status=="29"){ %>
+                <td width="8%" class="first" rowspan="2">経理却下</td>
+            <% }else if(rireki[k].status=="88"){ %>  
+                <td width="8%" class="first" rowspan="2">承認</td>
+            <% } %> 
+            <% if(rireki[k].code_name=="0"){ %>
+            <td width="11%">消耗品費</td>
+            <% }else if(rireki[k].code_name=="1"){ %> 
+                <td width="11%">新聞図書費</td>
+            <% }else if(rireki[k].code_name=="2"){ %> 
+                <td width="11%">会議費</td>
+            <% }else if(rireki[k].code_name=="3"){ %>
+                <td width="11%">交際費</td>
+            <% }else if(rireki[k].code_name=="4"){ %>
+                <td width="11%">その他</td>
+            <% } %> 
+            <td width="11%"><%-rireki[k].summary %></td>
+            <td width="5%"><input id="chkbox0" type="checkbox"/></td>
+            <td width="5%"><input id="chkbox0" type="checkbox"/></td>
+            <td width="3%" class="greyout"><%-rireki[k].month %></td>
+            <td width="3%" class="greyout"><%-rireki[k].day %></td>
+            <td width="7%" class="greyout"><%- rireki[k].amount %></td>
+            <td width="11%" class="greyout"><%- rireki[k].payee %></td>
+            <td width="5%" class="greyout"><%- rireki[k].ref_no %></td>
 
           <input type='hidden' name="<%- rireki[k].branch_no %>">
           <input type="hidden" class='form-control' value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'" name="approve" />
@@ -150,7 +144,7 @@
           </td>
         </tr>
         <tr>
-          <td class="comment" colspan="12"><%- rireki[k].remarks %></td>
+          <td class="comment" colspan="9"><%- rireki[k].remarks %></td>
         </tr>
       </table>
       <% } %>  

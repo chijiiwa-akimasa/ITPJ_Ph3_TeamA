@@ -11,6 +11,7 @@ var jmkotsuhi2Router = require('./routes/jmkotsuhi2');
 var jmkotsuhi3Router = require('./routes/jmkotsuhi3');
 var jmkotsuhi4Router = require('./routes/jmkotsuhi4')
 var jmkehiRouter = require('./routes/jmkehi');
+var jmkehi4Router = require('./routes/jmkehi4');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/jmkotsuhi2', jmkotsuhi2Router);
 app.use('/jmkotsuhi3', jmkotsuhi3Router);
 app.use('/jmkotsuhi4', jmkotsuhi4Router);
 app.use('/jmkehi', jmkehiRouter);
+app.use('/jmkehi4', jmkehi4Router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
