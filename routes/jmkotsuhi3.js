@@ -28,14 +28,18 @@ if (mm === 1 && dd<21) {
 
 router.get('/', async function(req, res, next) {
 
-    //DBに接続
-    var client =new Client({
-      user:'postgres',
-      host:'localhost',
-      database:'itpjph3',
-      password:dbpassword,
-      port:5432,
-    });
+    const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+      }) : new Client({
+        user: 'postgres',
+        host: 'localhost',
+        database: 'itpjph3',
+        password: dbpassword,
+        port: 5432
+      })
   
     nn = nn-1+1;
     mm = mm-1+1;
@@ -106,14 +110,18 @@ router.post('/',async function(req,res,next){
       nn = nn -1;
       mm = mm -1;
   
-      //DBに接続
-      var client =new Client({
-        user:'postgres',
-        host:'localhost',
-        database:'itpjph3',
-        password:dbpassword,
-        port:5432,
-      });
+      const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+      }) : new Client({
+        user: 'postgres',
+        host: 'localhost',
+        database: 'itpjph3',
+        password: dbpassword,
+        port: 5432
+      })
 
         let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql1 = "SELECT * FROM Employee";
@@ -176,14 +184,18 @@ router.post('/',async function(req,res,next){
         nn = nn -1+2;
         mm = mm -1+2;
     
-        //DBに接続
-        var client =new Client({
-          user:'postgres',
-          host:'localhost',
-          database:'itpjph3',
-          password:dbpassword,
-          port:5432,
-        });
+        const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+          }) : new Client({
+            user: 'postgres',
+            host: 'localhost',
+            database: 'itpjph3',
+            password: dbpassword,
+            port: 5432
+          })
 
         let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql1 = "SELECT * FROM Employee";
@@ -296,14 +308,18 @@ router.post('/',async function(req,res,next){
         nn = nn-1+1;
         mm = mm-1+1;
 
-        //DBに接続
-        var client =new Client({
-        user:'postgres',
-        host:'localhost',
-        database:'itpjph3',
-        password:dbpassword,
-        port:5432,
-        });
+        const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+          }) : new Client({
+            user: 'postgres',
+            host: 'localhost',
+            database: 'itpjph3',
+            password: dbpassword,
+            port: 5432
+          })
 
         let sql = "SELECT * FROM tedetail te,Employee em WHERE te.emp_no= em.emp_no AND job_manager='111' AND (year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20') AND status='11' ORDER BY te.emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql1 = "SELECT * FROM Employee";
@@ -363,3 +379,4 @@ router.post('/',async function(req,res,next){
 
 
 
+module.exports = router;
