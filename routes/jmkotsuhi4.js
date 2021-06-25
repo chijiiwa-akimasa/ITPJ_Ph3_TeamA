@@ -366,26 +366,51 @@ router.post('/',async function(req,res,next){
             }
         }
 
+        var com2=[];
+        var com4=[];
+
+        console.log(req.body.comment);
+
+        // for(let i=0;i<req.body.comment.length;i++){
+        //   if(req.body.comment[i]!==''){
+        //     var com="WHEN emp_no='"+req.body.emp_no[i]+"' AND sheet_year='"+req.body.year[i]+"' AND sheet_month='"+req.body.month[i]+"' AND branch_no='"+req.body.branch_no[i]+"' THEN CONCAT(comment,'/JM："+req.body.comment[i]+"')";
+        //     var com3="WHEN emp_no='"+req.body.emp_no[i]+"' AND sheet_year='"+req.body.year[i]+"' AND sheet_month='"+req.body.month[i]+"' AND branch_no='"+req.body.branch_no[i]+"' THEN '2'";
+        //     com2.push(com);
+        //     com4.push(com3);
+        //   }
+        // }
+
+        var com5=com2.join(" ");
+        var com6=com4.join(" ");
+        
+        var comup ="UPDATE TeComments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
+
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE ((year='"+yyyy+"' AND month='0"+mm+"' AND day BETWEEN '21' AND '31') OR (year='"+yyyy+"' AND month='0"+nn+"' AND day BETWEEN '1' AND '20')) AND job_manager='111' AND status='11' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND "+status2+" AND "+employee+" AND "+job_no2+" AND concat(year,month,day)BETWEEN'"+yyy1+""+m1+""+d1+"' AND '"+yyy2+""+m2+""+d2+"' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         let sql3 = "UPDATE teDetail set status='21' where " + app;
         let sql4 = "UPDATE teDetail set status='19' where " + denied;
+        let sql5 = "UPDATE teDetail set status='21' where " + comup;
+        let sql6 = "UPDATE teDetail set status='19' where " + comup;
         console.log(sql0);
         console.log(sql1);
         console.log(sql2);
         console.log(sql3);
         console.log(sql4);
+        console.log(sql5);
+        console.log(sql6);
 
         for(let [key, value] of Object.entries(req.body)){
             // 承認の場合、status='21'のアップデート文を実行
             if(value==='1'){
-                client.query(sql3)
+                client.query(sql3);
+                client.query(sql5);
             }
             // 却下の場合、status='19'のアップデート文を実行
             else if (value==='2'){
-                client.query(sql4)
+                client.query(sql4);
+                client.query(sql6);
             }
         }
 
@@ -474,7 +499,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyy1+"' AND month='"+m1+"' AND day>='"+d1+"') OR (year='"+yyy2+"' AND month='"+m2+"' AND day<='"+d2+"') AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND ((year>='"+yyy1+"' AND month>='"+m1+"' AND day>='"+d1+"') OR (year<='"+yyy2+"' AND month<='"+m2+"' AND day<='"+d2+"')) AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);

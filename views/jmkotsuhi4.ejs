@@ -32,8 +32,8 @@
       <option value="status='11'">JobM申請中</option>
       <option value="status='19'">JobM却下</option>
       <option value="status='21'">経理申請中</option>
-      <option value="status='29'">承認</option>
-      <option value="status='88'">却下</option>
+      <option value="status='88'">承認</option>
+      <option value="status='29'">経理却下</option>
     </select>
     <div class="d">社員</div>
     <select name="employee" id="employee" class="select">
@@ -153,7 +153,7 @@
             <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%- radioname[k] %> />
           </td>
           <td width="23%" class="first" rowspan="2">
-            <input type="text" class='textsize'/>
+            <input type="text" class='textsize' name='comment'/>
           </td>
         </tr>
         <tr>
