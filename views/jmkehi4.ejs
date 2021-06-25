@@ -121,8 +121,15 @@
                 <td width="11%">その他</td>
             <% } %> 
             <td width="11%"><%-rireki[k].summary %></td>
+            <% if(rireki[k].claim_flag=="1"){ %>
+            <td width="5%"><input id="chkbox0" type="checkbox" checked/></td>
+            <% }else if(rireki[k].claim_flag=="0"){ %> 
             <td width="5%"><input id="chkbox0" type="checkbox"/></td>
-            <td width="5%"><input id="chkbox0" type="checkbox"/></td>
+            <% } %> 
+            <% if(rireki[k].charge_flag=="1"){ %>
+            <td width="5%"><input id="chkbox0" type="checkbox" checked/></td>
+            <% }else if(rireki[k].charge_flag=="0"){ %> 
+            <% } %>
             <td width="3%" class="greyout"><%-rireki[k].month %></td>
             <td width="3%" class="greyout"><%-rireki[k].day %></td>
             <td width="7%" class="greyout"><%- rireki[k].amount %></td>
