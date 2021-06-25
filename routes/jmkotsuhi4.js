@@ -474,7 +474,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND ((year='"+yyy1+"' AND month='0"+m1+"' AND day='"+d1+"') OR (year='"+yyy2+"' AND month='0"+m2+"' AND day='"+d2+"')) AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND (year='"+yyy1+"' AND month='"+m1+"' AND day>='"+d1+"') OR (year='"+yyy2+"' AND month='"+m2+"' AND day<='"+d2+"') AND "+status2+" AND "+employee+" AND "+job_no2+" ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);
