@@ -474,7 +474,7 @@ router.post('/',async function(req,res,next){
 
         //各クエリ文を定義
         let sql0 = "SELECT * from Job";
-        let sql1 = "SELECT * FROM tedetail WHERE job_manager='111' AND "+status2+" AND "+employee+" AND "+job_no2+" AND concat(year,month,day)BETWEEN'"+yyy1+""+m1+""+d1+"' AND '"+yyy2+""+m2+""+d2+"' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
+        let sql1 = "SELECT * FROM exdetail WHERE job_manager='111' AND "+status2+" AND "+employee+" AND "+job_no2+" AND concat(year,month,day)BETWEEN'"+yyy1+""+m1+""+d1+"' AND '"+yyy2+""+m2+""+d2+"' ORDER BY emp_no ASC,sheet_year ASC,sheet_month ASC,branch_no ASC,job_no ASC";
         let sql2 = "SELECT * FROM Employee";
         console.log(sql0);
         console.log(sql1);
